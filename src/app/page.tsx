@@ -3,8 +3,7 @@
 import Image from 'next/image'
 import { useState } from 'react'
 
-// ─── Листопад 2026 calendar data ───
-// Nov 1 = Sunday (day index 6 in Mon-Sun grid)
+// Листопад 2026: 1 листопада = неділя (індекс 6 в сітці Пн-Нд)
 const NOV_DAYS = [
   [null, null, null, null, null, null, 1],
   [2, 3, 4, 5, 6, 7, 8],
@@ -35,6 +34,10 @@ export default function Home() {
   const set = (field: keyof FormData, value: string) =>
     setForm(prev => ({ ...prev, [field]: value }))
 
+  function scrollToInvite() {
+    document.getElementById('invite')?.scrollIntoView({ behavior: 'smooth' })
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setLoading(true)
@@ -51,37 +54,56 @@ export default function Home() {
 
   return (
     <main>
-      {/* ══════════════ HERO ══════════════ */}
-      <section className="hero">
-        <p className="hero-small">15 листопада 2026</p>
-        <h1 className="hero-names">Рулік &amp; Зоря</h1>
-        <p className="hero-tagline">Одружуємось!</p>
-        <p className="hero-poem">
-          Маленькі ми…<br />
-          Дві історії<br />
-          Одне «так»
-        </p>
-        <div className="hero-photos">
-          <div className="hero-photo-wrap">
-            <Image src="/images/rul.jpg" alt="Рулік у дитинстві" width={200} height={260} className="hero-photo" />
+
+      {/* ══════════════ HERO — envelope screen ══════════════ */}
+      <section className="hero-section">
+        <h1 className="hero-heading">Wedding Invitation</h1>
+        <p className="hero-subtext">тисніть сюди</p>
+        <p className="hero-arrow">↓</p>
+        <div
+          style={{ width: 340, height: 240, cursor: 'pointer', marginTop: 60 }}
+          onClick={scrollToInvite}
+          role="button"
+          aria-label="Відкрити запрошення"
+        >
+          <Image
+            src="/images/church-map.png"
+            alt="Запрошення"
+            width={340}
+            height={240}
+            style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 12, boxShadow: '0 10px 25px rgba(0,0,0,0.25)' }}
+          />
+        </div>
+      </section>
+
+      {/* ══════════════ INVITE — polaroids + text ══════════════ */}
+      <div id="invite" />
+      <section className="invite-section">
+        <p className="invite-text-top">Впізнали?</p>
+
+        {/* Polaroids */}
+        <div className="polaroid-pair">
+          <div className="polaroid left">
+            <Image src="/images/rul.jpg" alt="Рулік" width={236} height={300} style={{ width: '100%', height: 'auto' }} />
           </div>
-          <div className="hero-photo-wrap">
-            <Image src="/images/zor.jpg" alt="Зоря у дитинстві" width={200} height={260} className="hero-photo" />
+          <div className="polaroid-plus">+</div>
+          <div className="polaroid right">
+            <Image src="/images/zor.jpg" alt="Зоря" width={236} height={300} style={{ width: '100%', height: 'auto' }} />
           </div>
         </div>
       </section>
 
-      {/* ══════════════ INVITE ══════════════ */}
-      <section className="invite-section">
-        <p className="invite-dear">Любі Гості!</p>
-        <p className="invite-text">
+      {/* Dear guests text */}
+      <section className="dear-section">
+        <p className="dear-title">Любі Гості!</p>
+        <p className="dear-text">
           Ми раді запросити вас на наше весілля — у день, сповнений любові, світла й справжніх емоцій.
           <br /><br />
           Приєднуйтесь, щоб відсвяткувати цей особливий день разом з нами.
         </p>
       </section>
 
-      {/* ══════════════ CALENDAR ══════════════ */}
+      {/* Calendar */}
       <section className="calendar-section">
         <p className="calendar-month-label">Листопад 2026</p>
         <div className="calendar">
@@ -107,7 +129,7 @@ export default function Home() {
                       </div>
                       {day}
                     </div>
-                  ) : day ?? ''}
+                  ) : (day ?? '')}
                 </div>
               ))}
             </div>
@@ -115,41 +137,47 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="section-light" style={{ padding: '8px 0' }}>
-        <Image src="/images/divider.png" alt="" width={320} height={57} className="divider-img" />
-      </div>
-
-      {/* ══════════════ VENUE ══════════════ */}
-      <section className="venue-section">
-        <h2 className="section-title" style={{ color: '#3d4a2a' }}>Місце проведення</h2>
-        <p className="venue-name">Церква «Нове Життя»</p>
-        <p className="venue-address">Транспортна, 7, Тернопіль</p>
-        <Image
-          src="/images/church-map.png"
-          alt="Церква Нове Життя"
-          width={340}
-          height={240}
-          className="venue-img"
-          style={{ objectFit: 'contain' }}
-        />
-        <br />
-        <a
-          href="https://maps.app.goo.gl/aeRPJvfnjRE8bLpz8"
-          className="map-btn"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Подивитись на мапі
-        </a>
-        <div style={{ marginTop: 32 }}>
-          <Image src="/images/divider.png" alt="" width={320} height={57} className="divider-img" />
+      {/* ══════════════ VENUE (green card, sections 3+4) ══════════════ */}
+      <div className="card-wrap">
+        {/* top divider image */}
+        <div className="divider-wrap">
+          <Image src="/images/divider.png" alt="" width={500} height={89} className="divider-img" />
         </div>
-      </section>
+
+        <section className="venue-section">
+          <h2 className="venue-title">Місце проведення</h2>
+          <p className="venue-address-text">
+            <strong>Церква «Нове Життя»</strong><br />
+            Транспортна, 7, Тернопіль
+          </p>
+          <Image
+            src="/images/church-map.png"
+            alt="Церква Нове Життя"
+            width={340}
+            height={220}
+            className="venue-img"
+          />
+          <div style={{ marginBottom: 0 }}>
+            <Image src="/images/divider.png" alt="" width={500} height={89} className="divider-img" />
+          </div>
+          <a
+            href="https://maps.app.goo.gl/aeRPJvfnjRE8bLpz8"
+            className="map-btn"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Подивитись на мапі
+          </a>
+          <div>
+            <Image src="/images/divider.png" alt="" width={500} height={89} className="divider-img" />
+          </div>
+        </section>
+      </div>
 
       {/* ══════════════ DRESS CODE ══════════════ */}
       <section className="dresscode-section">
-        <h2 className="section-title" style={{ color: '#3d4a2a' }}>Дрес-код</h2>
-        <p className="section-subtitle" style={{ color: '#555' }}>
+        <h2 className="section-title-green">Дрес-код</h2>
+        <p className="section-text">
           Нам головне ваша присутність, але ми будемо вдячні, якщо ви підтримаєте кольорову гаму нашого свята
         </p>
         <div className="palette-wrapper">
@@ -164,148 +192,133 @@ export default function Home() {
             ))}
           </div>
         </div>
-        <Image src="/images/divider.png" alt="" width={320} height={57} className="divider-img" />
       </section>
 
       {/* ══════════════ PROGRAM ══════════════ */}
       <section className="program-section">
-        <h2 className="section-title">Програма дня</h2>
+        <h2 className="section-title-cream">Програма дня</h2>
         <div className="timeline">
           {[
             { label: 'Зустріч гостей', time: '14:00', img: '/images/timeline-1.png' },
             { label: 'Церемонія',       time: '15:00', img: '/images/timeline-2.png' },
             { label: 'Банкет',          time: '16:00', img: '/images/timeline-3.png' },
           ].map((item, i) => (
-            <div key={i} className="timeline-row" style={{ animationDelay: `${i * 0.2}s` }}>
+            <div key={i} className="timeline-row">
               <div className="t-left">{item.label}</div>
               <div className="t-center">
                 <div className="line-vert top" />
-                <Image src={item.img} alt={item.label} width={56} height={56} style={{ filter: 'brightness(0) invert(1)' }} />
+                <Image src={item.img} alt={item.label} width={60} height={60} />
                 <div className="line-vert bot" />
               </div>
               <div className="t-right">{item.time}</div>
             </div>
           ))}
         </div>
-        <Image src="/images/divider.png" alt="" width={320} height={57} className="divider-img" />
       </section>
 
-      {/* ══════════════ WISHES ══════════════ */}
-      <section className="wishes-section">
-        <h2 className="section-title" style={{ color: '#3d4a2a' }}>Побажання</h2>
-        <p className="section-subtitle" style={{ color: '#555' }}>
-          Просимо вас не дарувати нам квіти, нажаль, ми не встигнемо насолодитися їх красою.
-        </p>
-        <div className="wishes-icon">💍</div>
-        <p className="section-subtitle" style={{ color: '#555' }}>
-          Приємним компліментом для нас буде, якщо замість квітів ви вирішите обрати щось із нашого списку побажань.
-          Кожен подарунок стане для нас частинкою турботи та нагадуванням про цей особливий день.
-        </p>
-      </section>
+      {/* ══════════════ WISHES (section_7 → #fefdeb card) ══════════════ */}
+      <div className="wishes-section-wrap">
+        <div className="card-wrap">
+          <section className="wishes-section">
+            <div className="divider-wrap">
+              <Image src="/images/divider.png" alt="" width={500} height={89} className="divider-img" />
+            </div>
+            <h2 className="wishes-title">Побажання</h2>
+            <p className="wishes-text">
+              Просимо вас не дарувати нам квіти, нажаль, ми не встигнемо насолодитися їх красою.
+            </p>
+            <div className="wishes-icon">💍</div>
+            <p className="wishes-bottom-text">
+              Приємним компліментом для нас буде, якщо замість квітів ви вирішите обрати щось із нашого списку побажань.
+              Кожен подарунок стане для нас частинкою турботи та нагадуванням про цей особливий день.
+            </p>
+          </section>
+        </div>
+      </div>
 
       {/* ══════════════ FORM ══════════════ */}
       <section className="form-section">
-        <h2 className="section-title" style={{ color: '#3d4a2a' }}>Підтвердження присутності</h2>
-        <div className="form-wrap">
-          {submitted ? (
-            <p className="form-success">
-              Дякуємо! Ми вже чекаємо на вас 🌿
-            </p>
-          ) : (
-            <form onSubmit={handleSubmit}>
-              {/* Name */}
-              <div className="form-field">
-                <label className="form-label" htmlFor="rsvp-name">Ваше імʼя та прізвище</label>
-                <input
-                  id="rsvp-name"
-                  className="form-input"
-                  type="text"
-                  required
-                  placeholder="Ваше імʼя та прізвище"
-                  value={form.name}
-                  onChange={e => set('name', e.target.value)}
-                />
-              </div>
-
-              {/* Attending */}
-              <div className="form-field">
-                <span className="form-label">Чи плануєте ви бути на весіллі?</span>
-                <div className="radio-group" style={{ marginTop: 8 }}>
-                  {['Так, із задоволенням!', 'На жаль, не зможу'].map(opt => (
-                    <label key={opt} className="radio-item">
-                      <input
-                        type="radio"
-                        name="attending"
-                        value={opt}
-                        required
-                        checked={form.attending === opt}
-                        onChange={() => set('attending', opt)}
-                      />
-                      <span className="radio-icon" />
-                      {opt}
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {/* Accommodation */}
-              <div className="form-field">
-                <span className="form-label">Чи потрібна вам допомога з пошуком ночівлі?</span>
-                <div className="radio-group" style={{ marginTop: 8 }}>
-                  {['Так, буду вдячний/вдячна', 'Ні, дякую'].map(opt => (
-                    <label key={opt} className="radio-item">
-                      <input
-                        type="radio"
-                        name="accommodation"
-                        value={opt}
-                        required
-                        checked={form.accommodation === opt}
-                        onChange={() => {
-                          set('accommodation', opt)
-                          if (!opt.startsWith('Так')) set('accommodationNight', '')
-                        }}
-                      />
-                      <span className="radio-icon" />
-                      {opt}
-                    </label>
-                  ))}
+        <div className="card-wrap">
+          <h2 className="form-title">Підтвердження присутності</h2>
+          <div className="form-wrap">
+            {submitted ? (
+              <p className="form-success">Дякуємо! Ми вже чекаємо на вас 🌿</p>
+            ) : (
+              <form onSubmit={handleSubmit}>
+                {/* Name */}
+                <div className="form-field">
+                  <label className="form-label" htmlFor="rsvp-name">Ваше імʼя та прізвище</label>
+                  <input
+                    id="rsvp-name"
+                    className="form-input"
+                    type="text"
+                    required
+                    placeholder="Ваше імʼя та прізвище"
+                    value={form.name}
+                    onChange={e => set('name', e.target.value)}
+                  />
                 </div>
 
-                {/* Conditional: which night */}
-                {form.accommodation.startsWith('Так') && (
-                  <div className="accommodation-extra">
-                    <span className="form-label">Яка ніч вам потрібна?</span>
-                    <div className="nights-grid">
-                      {[
-                        'З суботи на неділю (15 → 16 листопада)',
-                        'З неділі на понеділок (16 → 17 листопада)',
-                        'Обидві ночі',
-                      ].map(opt => (
-                        <label key={opt} className="radio-item">
-                          <input
-                            type="radio"
-                            name="accommodationNight"
-                            value={opt}
-                            required={form.accommodation.startsWith('Так')}
-                            checked={form.accommodationNight === opt}
-                            onChange={() => set('accommodationNight', opt)}
-                          />
-                          <span className="radio-icon" />
-                          {opt}
-                        </label>
-                      ))}
-                    </div>
+                {/* Attending */}
+                <div className="form-field">
+                  <span className="form-label">Чи плануєте ви бути на весіллі?</span>
+                  <div className="radio-group" style={{ marginTop: 8 }}>
+                    {['Так, із задоволенням!', 'На жаль, не зможу'].map(opt => (
+                      <label key={opt} className="radio-item">
+                        <input type="radio" name="attending" value={opt} required
+                          checked={form.attending === opt} onChange={() => set('attending', opt)} />
+                        <span className="radio-icon" />
+                        {opt}
+                      </label>
+                    ))}
                   </div>
-                )}
-              </div>
+                </div>
 
-              <div style={{ textAlign: 'center' }}>
-                <button type="submit" className="submit-btn" disabled={loading}>
-                  {loading ? 'Надсилається…' : 'Відправити'}
-                </button>
-              </div>
-            </form>
-          )}
+                {/* Accommodation */}
+                <div className="form-field">
+                  <span className="form-label">Чи потрібна вам допомога з пошуком ночівлі?</span>
+                  <div className="radio-group" style={{ marginTop: 8 }}>
+                    {['Так, буду вдячний/вдячна', 'Ні, дякую'].map(opt => (
+                      <label key={opt} className="radio-item">
+                        <input type="radio" name="accommodation" value={opt} required
+                          checked={form.accommodation === opt}
+                          onChange={() => { set('accommodation', opt); if (!opt.startsWith('Так')) set('accommodationNight', '') }} />
+                        <span className="radio-icon" />
+                        {opt}
+                      </label>
+                    ))}
+                  </div>
+                  {form.accommodation.startsWith('Так') && (
+                    <div className="accommodation-extra">
+                      <span className="form-label">Яка ніч вам потрібна?</span>
+                      <div className="nights-grid">
+                        {[
+                          'З суботи на неділю (15 → 16 листопада)',
+                          'З неділі на понеділок (16 → 17 листопада)',
+                          'Обидві ночі',
+                        ].map(opt => (
+                          <label key={opt} className="radio-item">
+                            <input type="radio" name="accommodationNight" value={opt}
+                              required={form.accommodation.startsWith('Так')}
+                              checked={form.accommodationNight === opt}
+                              onChange={() => set('accommodationNight', opt)} />
+                            <span className="radio-icon" />
+                            {opt}
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div style={{ textAlign: 'center' }}>
+                  <button type="submit" className="submit-btn" disabled={loading}>
+                    {loading ? 'Надсилається…' : 'Відправити'}
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
         </div>
       </section>
 
@@ -318,6 +331,7 @@ export default function Home() {
           <p className="finale-names">Рулік та Зоря</p>
         </div>
       </section>
+
     </main>
   )
 }
