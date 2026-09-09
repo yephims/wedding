@@ -86,7 +86,7 @@ body {
 
 .invite-text-top {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 18px;
+  font-size: 26px;
   color: #7e875d;
   margin-bottom: 10px;
   letter-spacing: 1px;
@@ -257,7 +257,7 @@ body {
 /* ─── VENUE SECTION (section_3 + section_4 → green #b9c3a1) ─── */
 .venue-section {
   background-color: #b9c3a1 !important;
-  padding: 8px 20px 97px;
+  padding: 8px 20px 20px;
   text-align: center;
 }
 
@@ -266,7 +266,7 @@ body {
   font-size: 47px;
   color: #fcfdea;
   margin-top: 38px;
-  margin-bottom: 0;
+  margin-bottom: 38px;
 }
 
 .venue-address-text {
@@ -346,7 +346,7 @@ body {
   background-image: url('/images/colors.jpg');
   /* 200% width → left half = color, right half = fabric photo */
   /* 500% height → each of 5 colors occupies 20% */
-  background-size: initial;
+  background-size: 520%;
   background-position: -5px var(--swatch-pos);
   background-repeat: no-repeat;
   border: 2px solid rgba(0,0,0,0.15);
@@ -385,7 +385,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 60px;
+  margin-bottom: 0;
 }
 
 .t-left {
@@ -433,7 +433,7 @@ body {
 /* ─── WISHES SECTION (section_7 → #fefdeb) ─── */
 .wishes-section {
   background-color: #fefdeb !important;
-  padding: 29px 20px 0;
+  padding: 50px 20px 0;
   text-align: center;
   max-width: 86%;
   margin: 0 auto;
@@ -614,13 +614,13 @@ body {
 /* ─── FINALE SECTION (section_9, photo bg) ─── */
 .finale-section {
   position: relative;
-  min-height: 420px;
+  min-height: 430px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   overflow: hidden;
-  padding: 80px 20px;
+  padding: 80px 20px 60px;
 }
 
 .finale-bg {
@@ -648,7 +648,7 @@ body {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(28px, 6vw, 52px);
   letter-spacing: 3px;
-  margin-bottom: 14px;
+  margin-bottom: 240px;
   text-shadow: 0 2px 12px rgba(0,0,0,0.4);
 }
 
