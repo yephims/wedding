@@ -176,13 +176,12 @@ export default function Home() {
         </p>
         <div className="palette-wrapper">
           <div className="palette-row">
-            {['#c7d3bb','#b4c189','#78866f','#6e8396','#a5c3dd'].map(c => (
-              <div key={c} className="color-circle" style={{ background: c }} />
-            ))}
-          </div>
-          <div className="palette-row">
-            {['#ecd7bc','#ccbda0'].map(c => (
-              <div key={c} className="color-circle" style={{ background: c }} />
+            {[0, 20, 40, 60, 80].map(pos => (
+              <div
+                key={pos}
+                className="color-circle color-swatch"
+                style={{ '--swatch-pos': `${pos}%` } as React.CSSProperties}
+              />
             ))}
           </div>
         </div>
@@ -296,8 +295,8 @@ export default function Home() {
                             type="date"
                             className="form-input date-input"
                             required={form.accommodation.startsWith('Так')}
-                            min="2026-11-06"
-                            max="2026-11-09"
+                            min="2026-11-04"
+                            max="2026-11-12"
                             value={form.nightStart}
                             onChange={e => set('nightStart', e.target.value)}
                           />
@@ -309,8 +308,8 @@ export default function Home() {
                             type="date"
                             className="form-input date-input"
                             required={form.accommodation.startsWith('Так')}
-                            min="2026-11-07"
-                            max="2026-11-10"
+                            min="2026-11-04"
+                            max="2026-11-13"
                             value={form.nightEnd}
                             onChange={e => set('nightEnd', e.target.value)}
                           />

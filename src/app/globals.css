@@ -332,13 +332,32 @@ body {
   margin: 32px auto;
 }
 
-.palette-row { display: flex; gap: 8px; }
+.palette-row { display: flex; gap: 16px; justify-content: center; }
 
 .color-circle {
   width: 65px;
   height: 65px;
   border-radius: 50%;
   border: 2px solid rgba(0,0,0,0.12);
+}
+
+/* Swatch circles from colors.jpg */
+.color-swatch {
+  background-image: url('/images/colors.jpg');
+  /* 200% width → left half = color, right half = fabric photo */
+  /* 500% height → each of 5 colors occupies 20% */
+  background-size: 200% 500%;
+  background-position: 0% var(--swatch-pos);
+  background-repeat: no-repeat;
+  border: 2px solid rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: background-position 0.35s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.color-swatch:hover {
+  background-position: 100% var(--swatch-pos);
+  transform: scale(1.15);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.18);
 }
 
 /* ─── PROGRAM SECTION (section_6, dark green) ─── */
