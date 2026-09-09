@@ -1,13 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 const CHAT_ID = '-1003936464185'
+const SHEETS_URL =
+  'https://script.google.com/macros/s/AKfycbxThGN9plGQOTjVHWhq6C3vrNP63aONTA7ORTxRxqdcAAeo9fBclMFrCf8cJddmR8_8ag/exec'
 
 export async function POST(req: NextRequest) {
   try {
     const data = await req.json()
+    const { name, attending, accommodation, nightStart, nightEnd } = data
 
-    const { name, attending, accommodation, accommodationNight } = data
-
+    // ── 1. Telegram ──────────────────────────────────────────
     const lines = [
       '🌿 *Нове підтвердження присутності*',
       '',
@@ -15,37 +17,48 @@ export async function POST(req: NextRequest) {
       `✅ *Присутність:* ${attending}`,
       `🏨 *Ночівля:* ${accommodation}`,
     ]
-
-    if (accommodation?.startsWith('Так') && accommodationNight) {
-      lines.push(`🌙 *Ніч:* ${accommodationNight}`)
+    if (accommodation?.startsWith('Так') && nightStart) {
+      lines.push(`📅 *З:* ${nightStart}`)
+      lines.push(`📅 *До:* ${nightEnd}`)
     }
-
-    const text = lines.join('\n')
 
     const token = process.env.BOT_TOKEN
-    if (!token) {
+    if (token) {
+      const tgRes = await fetch(
+        `https://api.telegram.org/bot${token}/sendMessage`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: lines.join('\n'),
+            parse_mode: 'Markdown',
+          }),
+        }
+      )
+      const tgJson = await tgRes.json()
+      if (!tgJson.ok) console.error('[TG error]', tgJson)
+    } else {
       console.error('BOT_TOKEN is not set')
-      return NextResponse.json({ ok: false, error: 'Bot token missing' }, { status: 500 })
     }
 
-    const tgRes = await fetch(
-      `https://api.telegram.org/bot${token}/sendMessage`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: CHAT_ID,
-          text,
-          parse_mode: 'Markdown',
-        }),
-      }
+    // ── 2. Google Sheets ─────────────────────────────────────
+    // Columns: Timestamp | form_name | form_yes | form_night | form_night_start | form_night_end
+    const rowData = {
+      form_name: name,
+      form_yes: attending,
+      form_night: accommodation,
+      form_night_start: nightStart ?? '',
+      form_night_end: nightEnd ?? '',
+    }
+
+    const sheetsRes = await fetch(
+      `${SHEETS_URL}?data=${encodeURIComponent(JSON.stringify([rowData]))}`,
+      { method: 'GET' }
     )
-
-    const tgJson = await tgRes.json()
-
-    if (!tgJson.ok) {
-      console.error('[TG error]', tgJson)
-      return NextResponse.json({ ok: false, error: tgJson.description }, { status: 502 })
+    const sheetsJson = await sheetsRes.json().catch(() => null)
+    if (sheetsJson?.result !== 'success') {
+      console.error('[Sheets error]', sheetsJson)
     }
 
     return NextResponse.json({ ok: true })

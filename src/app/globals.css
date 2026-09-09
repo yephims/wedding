@@ -553,6 +553,23 @@ body {
 
 .nights-grid { display: flex; flex-direction: column; gap: 10px; }
 
+.date-row {
+  display: flex;
+  gap: 16px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+.date-field {
+  flex: 1;
+  min-width: 120px;
+}
+
+.date-input {
+  cursor: pointer;
+  color-scheme: light;
+}
+
 .submit-btn {
   display: inline-block;
   padding: 4px 60px;

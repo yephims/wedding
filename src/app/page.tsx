@@ -12,13 +12,14 @@ const NOV_DAYS = [
   [23, 24, 25, 26, 27, 28, 29],
   [30, null, null, null, null, null, null],
 ]
-const HIGHLIGHTED_DAY = 15
+const HIGHLIGHTED_DAY = 6
 
 type FormData = {
   name: string
   attending: string
   accommodation: string
-  accommodationNight: string
+  nightStart: string
+  nightEnd: string
 }
 
 export default function Home() {
@@ -26,7 +27,8 @@ export default function Home() {
     name: '',
     attending: '',
     accommodation: '',
-    accommodationNight: '',
+    nightStart: '',
+    nightEnd: '',
   })
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -271,7 +273,13 @@ export default function Home() {
                       <label key={opt} className="radio-item">
                         <input type="radio" name="accommodation" value={opt} required
                           checked={form.accommodation === opt}
-                          onChange={() => { set('accommodation', opt); if (!opt.startsWith('Так')) set('accommodationNight', '') }} />
+                          onChange={() => {
+                            set('accommodation', opt)
+                            if (!opt.startsWith('Так')) {
+                              set('nightStart', '')
+                              set('nightEnd', '')
+                            }
+                          }} />
                         <span className="radio-icon" />
                         {opt}
                       </label>
@@ -279,22 +287,34 @@ export default function Home() {
                   </div>
                   {form.accommodation.startsWith('Так') && (
                     <div className="accommodation-extra">
-                      <span className="form-label">Яка ніч вам потрібна?</span>
-                      <div className="nights-grid">
-                        {[
-                          'З суботи на неділю (15 → 16 листопада)',
-                          'З неділі на понеділок (16 → 17 листопада)',
-                          'Обидві ночі',
-                        ].map(opt => (
-                          <label key={opt} className="radio-item">
-                            <input type="radio" name="accommodationNight" value={opt}
-                              required={form.accommodation.startsWith('Так')}
-                              checked={form.accommodationNight === opt}
-                              onChange={() => set('accommodationNight', opt)} />
-                            <span className="radio-icon" />
-                            {opt}
-                          </label>
-                        ))}
+                      <span className="form-label">Вкажіть дати ночівлі:</span>
+                      <div className="date-row">
+                        <div className="date-field">
+                          <label className="form-label" htmlFor="night-start">З</label>
+                          <input
+                            id="night-start"
+                            type="date"
+                            className="form-input date-input"
+                            required={form.accommodation.startsWith('Так')}
+                            min="2026-11-06"
+                            max="2026-11-09"
+                            value={form.nightStart}
+                            onChange={e => set('nightStart', e.target.value)}
+                          />
+                        </div>
+                        <div className="date-field">
+                          <label className="form-label" htmlFor="night-end">До</label>
+                          <input
+                            id="night-end"
+                            type="date"
+                            className="form-input date-input"
+                            required={form.accommodation.startsWith('Так')}
+                            min="2026-11-07"
+                            max="2026-11-10"
+                            value={form.nightEnd}
+                            onChange={e => set('nightEnd', e.target.value)}
+                          />
+                        </div>
                       </div>
                     </div>
                   )}
