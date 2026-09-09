@@ -19,9 +19,7 @@ body {
   align-items: center;
   justify-content: flex-start;
   padding-top: 80px;
-  background-image: url('/images/envelope-bg.png');
-  background-size: cover;
-  background-position: center;
+  background-color: #fff;
 }
 
 .hero-heading {
@@ -131,25 +129,31 @@ body {
 /* ─── DEAR GUESTS TEXT ─── */
 .dear-section {
   text-align: center;
-  padding: 10px 20px 40px;
-  background: #fff;
+  background-image: url('/images/envelope-bg.png');
+  background-size: cover;
+  background-position: center;
+  padding-top: 90px;
+  padding-bottom: 34px;
 }
 
 .dear-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 34px;
+  font-family: 'Great Vibes', cursive;
+  font-size: 45px;
   color: #7e875d;
-  margin-bottom: 20px;
+  margin-top: 17px;
+  margin-bottom: 8px;
 }
 
 .dear-text {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Cormorant Garamond', Georgia, "Times New Roman", serif;
+  font-weight: 300;
   font-size: 20px;
+  padding-top: 18px;
+  margin-right: 15%;
+  margin-bottom: 138px;
+  margin-left: 15%;
+  line-height: 1.7;
   color: #555;
-  max-width: 560px;
-  margin: 0 auto;
-  line-height: 1.8;
-  font-style: italic;
 }
 
 /* ─── CALENDAR SECTION (section_2, same light bg) ─── */
