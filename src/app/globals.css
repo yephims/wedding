@@ -19,7 +19,9 @@ body {
   align-items: center;
   justify-content: flex-start;
   padding-top: 80px;
-  background-color: #fff;
+  background-image: url('/images/envelope-bg.png');
+  background-size: cover;
+  background-position: center;
 }
 
 .hero-heading {
@@ -60,12 +62,28 @@ body {
   50% { transform: translateY(6px); }
 }
 
-/* ─── INVITE SECTION (section_2, green bg) ─── */
-/* section_2 has background with photo in original – we replicate with polaroids */
+.envelope-btn {
+  width: 340px;
+  height: 240px;
+  cursor: pointer;
+  margin-top: 60px;
+  animation: bounce 2s ease infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@media (max-width: 480px) {
+  .envelope-btn { width: 280px; height: 200px; }
+}
+
+/* ─── INVITE SECTION ─── */
 .invite-section {
   background-color: #fff;
   text-align: center;
-  padding: 60px 20px 40px;
+  padding: 40px 20px 20px;
 }
 
 .invite-text-top {
@@ -113,7 +131,7 @@ body {
 /* ─── DEAR GUESTS TEXT ─── */
 .dear-section {
   text-align: center;
-  padding: 30px 20px 60px;
+  padding: 10px 20px 40px;
   background: #fff;
 }
 

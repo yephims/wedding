@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
 // Листопад 2026: 1 листопада = неділя (індекс 6 в сітці Пн-Нд)
 const NOV_DAYS = [
@@ -30,11 +30,13 @@ export default function Home() {
   })
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
+  const audioRef = useRef<HTMLAudioElement>(null)
 
   const set = (field: keyof FormData, value: string) =>
     setForm(prev => ({ ...prev, [field]: value }))
 
   function scrollToInvite() {
+    audioRef.current?.play().catch(() => {})
     document.getElementById('invite')?.scrollIntoView({ behavior: 'smooth' })
   }
 
@@ -61,19 +63,20 @@ export default function Home() {
         <p className="hero-subtext">тисніть сюди</p>
         <p className="hero-arrow">↓</p>
         <div
-          style={{ width: 340, height: 240, cursor: 'pointer', marginTop: 60 }}
+          className="envelope-btn"
           onClick={scrollToInvite}
           role="button"
           aria-label="Відкрити запрошення"
         >
           <Image
-            src="/images/church-map.png"
-            alt="Запрошення"
+            src="/images/envelope.png"
+            alt="Конверт"
             width={340}
             height={240}
-            style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 12, boxShadow: '0 10px 25px rgba(0,0,0,0.25)' }}
+            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
           />
         </div>
+        <audio ref={audioRef} loop src="/music.mp3" />
       </section>
 
       {/* ══════════════ INVITE — polaroids + text ══════════════ */}
@@ -139,11 +142,6 @@ export default function Home() {
 
       {/* ══════════════ VENUE (green card, sections 3+4) ══════════════ */}
       <div className="card-wrap">
-        {/* top divider image */}
-        <div className="divider-wrap">
-          <Image src="/images/divider.png" alt="" width={500} height={89} className="divider-img" />
-        </div>
-
         <section className="venue-section">
           <h2 className="venue-title">Місце проведення</h2>
           <p className="venue-address-text">
@@ -157,9 +155,6 @@ export default function Home() {
             height={220}
             className="venue-img"
           />
-          <div style={{ marginBottom: 0 }}>
-            <Image src="/images/divider.png" alt="" width={500} height={89} className="divider-img" />
-          </div>
           <a
             href="https://maps.app.goo.gl/aeRPJvfnjRE8bLpz8"
             className="map-btn"
@@ -168,9 +163,6 @@ export default function Home() {
           >
             Подивитись на мапі
           </a>
-          <div>
-            <Image src="/images/divider.png" alt="" width={500} height={89} className="divider-img" />
-          </div>
         </section>
       </div>
 
@@ -220,9 +212,6 @@ export default function Home() {
       <div className="wishes-section-wrap">
         <div className="card-wrap">
           <section className="wishes-section">
-            <div className="divider-wrap">
-              <Image src="/images/divider.png" alt="" width={500} height={89} className="divider-img" />
-            </div>
             <h2 className="wishes-title">Побажання</h2>
             <p className="wishes-text">
               Просимо вас не дарувати нам квіти, нажаль, ми не встигнемо насолодитися їх красою.
