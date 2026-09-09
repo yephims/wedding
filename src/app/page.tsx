@@ -176,7 +176,7 @@ export default function Home() {
         </p>
         <div className="palette-wrapper">
           <div className="palette-row">
-            {[0, 20, 40, 60, 80].map(pos => (
+            {[10, 30, 50, 70, 90].map(pos => (
               <div
                 key={pos}
                 className="color-circle color-swatch"

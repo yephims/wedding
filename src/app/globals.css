@@ -346,8 +346,8 @@ body {
   background-image: url('/images/colors.jpg');
   /* 200% width → left half = color, right half = fabric photo */
   /* 500% height → each of 5 colors occupies 20% */
-  background-size: 200% 500%;
-  background-position: 0% var(--swatch-pos);
+  background-size: initial;
+  background-position: -5px var(--swatch-pos);
   background-repeat: no-repeat;
   border: 2px solid rgba(0,0,0,0.15);
   cursor: pointer;
@@ -355,7 +355,7 @@ body {
 }
 
 .color-swatch:hover {
-  background-position: 100% var(--swatch-pos);
+  background-position: 99% var(--swatch-pos);
   transform: scale(1.15);
   box-shadow: 0 6px 20px rgba(0,0,0,0.18);
 }
