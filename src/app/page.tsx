@@ -56,14 +56,19 @@ export default function Home() {
         <p className="hero-small">15 листопада 2026</p>
         <h1 className="hero-names">Рулік &amp; Зоря</h1>
         <p className="hero-tagline">Одружуємось!</p>
-        <div className="hero-divider">
-          <Image src="/images/divider.png" alt="" width={320} height={57} style={{ opacity: 0.65 }} />
-        </div>
         <p className="hero-poem">
           Маленькі ми…<br />
           Дві історії<br />
           Одне «так»
         </p>
+        <div className="hero-photos">
+          <div className="hero-photo-wrap">
+            <Image src="/images/rul.jpg" alt="Рулік у дитинстві" width={200} height={260} className="hero-photo" />
+          </div>
+          <div className="hero-photo-wrap">
+            <Image src="/images/zor.jpg" alt="Зоря у дитинстві" width={200} height={260} className="hero-photo" />
+          </div>
+        </div>
       </section>
 
       {/* ══════════════ INVITE ══════════════ */}
@@ -182,7 +187,7 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <Image src="/images/divider.png" alt="" width={320} height={57} className="divider-img" style={{ opacity: 0.3, filter: 'invert(1)' }} />
+        <Image src="/images/divider.png" alt="" width={320} height={57} className="divider-img" />
       </section>
 
       {/* ══════════════ WISHES ══════════════ */}
@@ -196,7 +201,6 @@ export default function Home() {
           Приємним компліментом для нас буде, якщо замість квітів ви вирішите обрати щось із нашого списку побажань.
           Кожен подарунок стане для нас частинкою турботи та нагадуванням про цей особливий день.
         </p>
-        <Image src="/images/divider.png" alt="" width={320} height={57} className="divider-img" style={{ marginTop: 20 }} />
       </section>
 
       {/* ══════════════ FORM ══════════════ */}
