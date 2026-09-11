@@ -1,0 +1,496 @@
+/* ─── ArGa page — isolated styles, no globals override ─── */
+
+.ag body, .ag-page {
+  font-family: 'Playfair Display', Georgia, "Times New Roman", serif;
+  background: #faf3eb;
+  color: #572733;
+  overflow-x: hidden;
+}
+
+/* ── HERO ── */
+.ag-hero {
+  height: 650px;
+  width: 100%;
+  background-image: url('/artem-galynka/bg.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ag-heading {
+  font-family: 'Great Vibes', cursive;
+  font-size: 80px;
+  line-height: 1.3;
+  padding: 0.5em 0 0.6em;
+  color: #3f1f26;
+  margin-bottom: 10px;
+  opacity: 0;
+  animation: ag-fadeIn 1.5s ease forwards;
+  white-space: nowrap;
+  text-align: center;
+}
+
+@keyframes ag-fadeIn { to { opacity: 1; } }
+
+.ag-subtext {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #6b3a42;
+  font-weight: bold;
+  text-align: center;
+  opacity: 0.85;
+}
+
+.ag-arrow {
+  font-size: 24px;
+  color: #7f4a52;
+  animation: ag-bounce 1.5s infinite;
+  text-align: center;
+}
+
+@keyframes ag-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(6px); }
+}
+
+.ag-envelope {
+  width: 340px;
+  height: 240px;
+  cursor: pointer;
+  margin-top: 60px;
+  animation: ag-float 2s ease infinite;
+}
+
+@keyframes ag-float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+/* Full photo overlay after click */
+.ag-full-photo {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+.ag-full-photo.show { opacity: 1; pointer-events: auto; }
+
+.ag-full-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  position: absolute; top: 0; left: 0;
+  filter: grayscale(40%);
+}
+
+.ag-photo-gradient {
+  position: absolute; bottom: 0; width: 100%; height: 100%;
+  background: linear-gradient(to top, rgba(255,255,255,0.92), rgba(255,255,255,0));
+  z-index: 2;
+}
+
+.ag-photo-caption {
+  position: absolute; bottom: 200px; width: 100%;
+  text-align: center;
+  font-family: 'Great Vibes', cursive;
+  font-size: 70px; color: #572733; z-index: 3;
+  text-shadow: 1px 1px 4px rgba(255,255,255,0.7);
+  opacity: 0; transform: translateY(20px);
+  transition: all 1s ease 0.8s;
+}
+
+.ag-timer-wrap {
+  position: absolute; bottom: 40px; width: 100%;
+  text-align: center; z-index: 3;
+  opacity: 0; transform: translateY(20px);
+  transition: 1s ease 1s;
+}
+
+.ag-full-photo.show .ag-photo-caption,
+.ag-full-photo.show .ag-timer-wrap { opacity: 1; transform: translateY(0); }
+
+.ag-timer-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; margin-bottom: 12px; color: #572733;
+}
+
+.ag-timer {
+  display: flex; justify-content: center; gap: 8px;
+}
+
+.ag-time-box {
+  background: rgba(255,255,255,0.35);
+  backdrop-filter: blur(6px);
+  border-radius: 10px; padding: 10px 8px; min-width: 55px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.ag-time-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; font-weight: 600; color: #3f1f26;
+  display: block;
+}
+
+.ag-time-label { font-size: 10px; color: #6b3a42; }
+
+/* ── INVITE SECTION (section_1, bg2 bg) ── */
+.ag-invite {
+  background-image: url('/artem-galynka/bg2.png'), linear-gradient(180deg, #faf3eb 0%, rgba(255,255,255,0) 100%);
+  background-size: cover;
+  background-position: center;
+  padding: 40px 20px;
+  text-align: center;
+  max-width: 33%;
+  margin: 0 auto;
+}
+
+.ag-dear {
+  font-family: 'Great Vibes', cursive;
+  font-size: 49px; color: #572733;
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+
+.ag-invite-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px; color: #572733;
+  line-height: 1.7; margin-bottom: 20px;
+}
+
+/* ── CALENDAR ── */
+.ag-calendar-section {
+  background-image: url('/artem-galynka/bg2.png'), linear-gradient(180deg, #faf3eb 0%, rgba(255,255,255,0) 100%);
+  background-size: cover;
+  padding: 20px 50px 60px;
+  text-align: center;
+  max-width: 33%;
+  margin: 0 auto;
+}
+
+.ag-month {
+  font-family: 'Great Vibes', cursive;
+  font-size: 58px; color: #3f1f26;
+  margin: 0 0 10px;
+}
+
+.ag-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  justify-items: center;
+  align-items: center;
+  max-width: 360px;
+  margin: 10px auto;
+  font-size: 16px;
+  font-family: 'Playfair Display', serif;
+  color: #572733;
+}
+
+.ag-cal-day {
+  width: 26px; height: 26px; line-height: 26px; text-align: center;
+}
+
+.ag-cal-hdr {
+  font-weight: 700; font-size: 13px;
+}
+
+.ag-heart-day {
+  position: relative; width: 50px; height: 50px;
+  display: flex; justify-content: center; align-items: center;
+}
+
+.ag-heart-day .ag-day-num {
+  position: relative; z-index: 2;
+  font-weight: 900; font-size: 18px; color: #572733;
+}
+
+.ag-heart-img {
+  position: absolute; top: 50%; left: 50%;
+  width: 56px; height: 56px;
+  transform: translate(-50%, -50%);
+  z-index: 1; opacity: 0.8;
+  animation: ag-pulse 1.5s infinite 2s;
+  filter: blur(0.5px);
+  pointer-events: none;
+}
+
+@keyframes ag-pulse {
+  0%, 100% { transform: translate(-50%,-50%) scale(1); }
+  50%       { transform: translate(-50%,-50%) scale(1.1); }
+}
+
+.ag-year {
+  font-size: 24px; margin-top: 16px; color: #3f1f26;
+  font-family: 'Playfair Display', serif;
+}
+
+/* ── VENUE (section_2) ── */
+.ag-venue {
+  background-image: url('/artem-galynka/bg2.png'), linear-gradient(180deg, #faf3eb 0%, rgba(255,255,255,0) 100%);
+  background-size: cover;
+  padding: 17px 20px 30px;
+  text-align: center;
+  max-width: 33%;
+  margin: 0 auto;
+}
+
+.ag-venue-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 49px; color: #572733;
+  margin-top: 102px; margin-bottom: 19px;
+  line-height: 1.1;
+}
+
+.ag-venue-img {
+  border-radius: 60px;
+  overflow: hidden;
+  max-width: 320px;
+  margin: 0 auto 16px;
+  display: block;
+}
+
+.ag-venue-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; color: #572733; margin-bottom: 6px;
+}
+
+.ag-venue-addr {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px; color: #7a5060; margin-bottom: 20px;
+}
+
+.ag-map-btn {
+  display: inline-block;
+  padding: 10px 50px;
+  border: 1px solid #c6c6c6;
+  border-radius: 50px;
+  color: #572733;
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  background: rgba(240,234,224,0.24);
+  text-decoration: none;
+  margin-bottom: 62px;
+  transition: background 0.3s;
+}
+.ag-map-btn:hover { background: rgba(87,39,51,0.1); }
+
+.ag-timing-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 49px; color: #572733; margin-top: 102px;
+  line-height: 1.1;
+}
+
+/* ── PROGRAM (section_3, full-width dark) ── */
+.ag-program {
+  background: #2c1a1e;
+  padding: 40px 20px;
+  text-align: center;
+  color: #faf3eb;
+}
+
+.ag-timeline {
+  max-width: 640px; margin: 0 auto;
+  font-family: 'Playfair Display', serif;
+  text-transform: uppercase; letter-spacing: 1px;
+}
+
+.ag-trow {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  margin-bottom: 60px;
+}
+
+.ag-tleft {
+  width: 30%; font-size: 22px;
+  color: #572733; text-align: center;
+  font-family: 'Playfair Display', serif;
+  color: #e8d5c0;
+}
+
+.ag-tright {
+  width: 30%; font-size: 36px;
+  color: rgba(232,213,192,0.85); text-align: center;
+  letter-spacing: 3px;
+}
+
+.ag-tcenter {
+  width: 60px; display: flex;
+  flex-direction: column; align-items: center;
+}
+
+.ag-tcenter img {
+  width: 60px; height: 60px;
+  filter: grayscale(100%) brightness(200%);
+  z-index: 2;
+}
+
+.ag-line {
+  width: 2px; background: #999;
+}
+.ag-line.top { height: 50px; margin-bottom: 8px; }
+.ag-line.bot { height: 50px; margin-top: 8px; }
+
+/* ── DRESS CODE (section_4) ── */
+.ag-dresscode {
+  background: #faf3eb;
+  padding: 40px 20px;
+  text-align: center;
+  max-width: 33%;
+  margin: 0 auto;
+}
+
+.ag-section-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 49px; color: #572733;
+  margin-bottom: 8px; line-height: 1.1;
+}
+
+.ag-section-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px; color: #572733;
+  margin: 0 2% 20px; line-height: 1.7;
+}
+
+.ag-palette {
+  display: flex; gap: 12px;
+  justify-content: center; padding: 20px;
+}
+
+.ag-color-circle {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+/* ── FORM (section_5, photo bg) ── */
+.ag-form-section {
+  background-image: linear-gradient(180deg, #f9f6f2 0%, rgba(255,255,255,0.36) 100%), url('/artem-galynka/photo-couple.jpg');
+  background-size: cover;
+  background-position: center top;
+  padding: 3vw 20px;
+  max-width: 33%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.ag-form-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 49px; color: #572733;
+  margin-top: 15px; margin-bottom: 27px;
+  line-height: 1.1;
+}
+
+.ag-form-subtitle {
+  font-family: 'Playfair Display', serif;
+  margin: 0 2% 45px; color: #572733;
+  font-size: 16px; line-height: 1.7;
+}
+
+.ag-form-wrap { max-width: 500px; margin: 0 auto; text-align: left; }
+
+.ag-field { margin-bottom: 24px; }
+
+.ag-label {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 15px; color: rgba(68,66,53,0.8);
+  margin-bottom: 6px;
+}
+
+.ag-input {
+  width: 100%; padding: 12px 16px;
+  background: #fff; border: none;
+  font-family: 'Playfair Display', serif;
+  font-size: 14px; color: rgba(68,66,53,0.8);
+  outline: none;
+}
+.ag-input::placeholder { color: rgba(68,66,53,0.8); opacity: 1; }
+.ag-textarea { resize: vertical; min-height: 80px; }
+
+.ag-radio-group { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+
+.ag-radio-item {
+  display: flex; align-items: center; gap: 10px;
+  cursor: pointer; font-family: 'Playfair Display', serif;
+  font-size: 15px; color: rgba(68,66,53,0.8);
+}
+.ag-radio-item input[type="radio"] { display: none; }
+.ag-radio-icon {
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 2px solid #572733; background: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.ag-radio-item input[type="radio"]:checked + .ag-radio-icon { background: #572733; }
+.ag-radio-item input[type="radio"]:checked + .ag-radio-icon::after {
+  content: ''; width: 8px; height: 8px;
+  border-radius: 50%; background: #fff;
+}
+
+.ag-submit {
+  padding: 4px 2em 4px 0.7em;
+  border: 5px solid #fff;
+  background: #fff; color: #572733;
+  font-family: 'Playfair Display', serif;
+  font-size: 15px; text-transform: uppercase;
+  letter-spacing: 1px; cursor: pointer;
+  margin-top: 15px;
+  transition: background 0.3s;
+}
+.ag-submit:hover { background: #f5ede6; }
+
+.ag-love {
+  font-family: 'Great Vibes', cursive;
+  font-size: 57px; color: #572733;
+  padding-bottom: 30px; margin-bottom: 9px;
+  text-align: center;
+}
+
+.ag-names {
+  font-family: 'Playfair Display', serif;
+  font-size: 56px; color: #572733;
+  line-height: 1; margin-bottom: 288px;
+  text-align: center;
+}
+
+.ag-success {
+  text-align: center; font-size: 20px;
+  color: #572733; font-style: italic;
+  padding: 30px 0; font-family: 'Playfair Display', serif;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 980px) {
+  .ag-invite, .ag-calendar-section, .ag-venue,
+  .ag-dresscode, .ag-form-section { max-width: 54%; }
+}
+
+@media (max-width: 767px) {
+  .ag-invite, .ag-calendar-section, .ag-venue,
+  .ag-dresscode, .ag-form-section { max-width: 100%; }
+  .ag-heading { font-size: 50px; }
+  .ag-photo-caption { font-size: 52px; bottom: 180px; }
+  .ag-timer-title { font-size: 16px; }
+  .ag-tleft { font-size: 16px; }
+  .ag-tright { font-size: 26px; }
+  .ag-names { font-size: 38px; }
+}
+
+@media (max-width: 480px) {
+  .ag-hero { height: 700px; padding-top: 40px; }
+  .ag-heading { font-size: 50px; }
+  .ag-envelope { width: 280px; height: 200px; margin-top: 70px; }
+  .ag-photo-caption { font-size: 52px; bottom: 200px; }
+  .ag-cal-grid { gap: 4px; }
+}
