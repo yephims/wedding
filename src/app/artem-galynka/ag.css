@@ -11,7 +11,7 @@
 .ag-hero {
   height: 650px;
   width: 100%;
-  background-image: url('/artem-galynka/photo_2026-03-20-17.17.28.jpeg');
+  background-image: url('/artem-galynka/hero-bg.jpg');
   background-size: cover;
   background-position: center;
   display: flex;
@@ -144,59 +144,26 @@
 
 .ag-time-label { font-size: 10px; color: #6b3a42; }
 
-/* ── INVITE + CALENDAR shared bg wrapper ── */
-.ag-invite-calendar-wrap {
-  background-image: url('/artem-galynka/bg2.png');
-  background-size: cover;
-  background-position: center;
-}
-
-/* ── DEAR SECTION (photo bg with text) ── */
-.ag-dear-section {
-  background-image: url('/artem-galynka/photo_2026-03-20-17.17.28.jpeg');
-  background-size: cover;
-  background-position: center;
-  padding: 90px 20px 34px;
-  text-align: center;
-}
-
-.ag-dear-content {
-  max-width: 600px;
-  margin: 0 auto 30px;
-}
-
-.ag-dear-text {
-  font-family: 'Great Vibes', cursive;
-  font-size: 45px; color: #3f1f26;
-  margin-top: 17px; margin-bottom: 8px;
-}
-
-.ag-dear-invite {
-  font-family: 'Playfair Display', serif;
-  font-size: 20px; color: #572733;
-  padding-top: 18px; margin: 0 15% 138px;
-  line-height: 1.6;
-}
-
-.ag-dear-photos {
-  display: flex; justify-content: center; gap: 20px;
-  flex-wrap: wrap;
-}
-
-.ag-dear-photo {
-  width: 150px; height: 150px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 3px solid #fff;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-
-/* ── INVITE TEXT (unused now, kept for reference) ── */
+/* ── INVITE TEXT ── */
 .ag-invite {
-  display: none;
+  padding: 40px 20px 20px;
+  text-align: center;
+  max-width: 33%;
+  margin: 0 auto;
 }
 
-/* ── CALENDAR ── */
+.ag-dear {
+  font-family: 'Great Vibes', cursive;
+  font-size: 49px; color: #572733;
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+
+.ag-invite-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px; color: #572733;
+  line-height: 1.7; margin-bottom: 20px;
+}
 
 /* ── CALENDAR ── */
 .ag-calendar-section {
@@ -207,7 +174,6 @@
   position: relative;
 }
 
-/* calendar photo behind the grid */
 .ag-calendar-inner {
   position: relative;
 }
@@ -280,7 +246,7 @@
   font-family: 'Playfair Display', serif;
 }
 
-/* ── VENUE (section_2) ── */
+/* ── VENUE ── */
 .ag-venue {
   background-image: url('/artem-galynka/bg2.png');
   background-size: cover;
@@ -331,20 +297,20 @@
 }
 .ag-map-btn:hover { background: rgba(87,39,51,0.1); }
 
-/* ── PROGRAM (section_3, photo bg) ── */
+.ag-timing-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 49px; color: #572733;
+  margin-top: 15px; margin-bottom: 20px;
+  line-height: 1.1;
+}
+
+/* ── PROGRAM ── */
 .ag-program {
   background-image: url('/artem-galynka/program-bg.png');
   background-size: cover;
   background-position: center top;
   padding: 40px 20px;
   text-align: center;
-}
-
-.ag-timing-title {
-  font-family: 'Great Vibes', cursive;
-  font-size: 49px; color: #572733;
-  margin-top: 15px; margin-bottom: 20px;
-  line-height: 1.1;
 }
 
 .ag-timeline {
@@ -388,7 +354,7 @@
 .ag-line.top { height: 50px; margin-bottom: 8px; }
 .ag-line.bot { height: 50px; margin-top: 8px; }
 
-/* ── DRESS CODE (section_4) ── */
+/* ── DRESS CODE ── */
 .ag-dresscode {
   background: #faf3eb;
   padding: 40px 20px;
@@ -397,7 +363,6 @@
   margin: 0 auto;
 }
 
-/* inner wrapper with the photo bg — matches et_pb_row_3 offsets */
 .ag-dresscode-inner {
   background-image: url('/artem-galynka/dresscode-bg.png');
   background-size: contain;
@@ -425,24 +390,13 @@
   justify-content: center; padding: 20px;
 }
 
-/* colors.jpg has 5 vertical stripes: left=colors, right=photos
-   Each circle is 60px, 5 circles = 300px total width
-   colors.jpg is horizontal, so we need to use background-position-x */
 .ag-color-circle {
   width: 60px; height: 60px;
   border-radius: 50%;
   border: 1px solid rgba(0,0,0,0.1);
-  background-image: url('/images/colors.jpg');
-  background-size: 300px 100px;
-  background-position: 0 0;
-  transition: background-position 0.3s ease;
 }
 
-.ag-color-circle:hover {
-  background-position: 0 100%;
-}
-
-/* ── FORM (section_5, photo bg) ── */
+/* ── FORM ── */
 .ag-form-section {
   background-image: linear-gradient(180deg, #f9f6f2 0%, rgba(255,255,255,0.36) 100%), url('/artem-galynka/hero-bg.jpg');
   background-size: cover;
