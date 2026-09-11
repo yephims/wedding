@@ -3,23 +3,25 @@
 import Image from 'next/image'
 import { useState, useRef, useEffect } from 'react'
 
-// Жовтень 2026: 1 жовтня = четвер (індекс 3 в сітці Пн-Нд)
-const OCT_DAYS = [
-  [null, null, null, 1, 2, 3, 4],
-  [5, 6, 7, 8, 9, 10, 11],
-  [12, 13, 14, 15, 16, 17, 18],
-  [19, 20, 21, 22, 23, 24, 25],
-  [26, 27, 28, 29, 30, 31, null],
+// Листопад 2026: 6 листопада = п'ятниця (індекс 4 в сітці Пн-Нд)
+const NOV_DAYS = [
+  [null, null, 1, 2, 3, 4, 5],
+  [6, 7, 8, 9, 10, 11, 12],
+  [13, 14, 15, 16, 17, 18, 19],
+  [20, 21, 22, 23, 24, 25, 26],
+  [27, 28, 29, 30, 31, null, null],
 ]
-const WEDDING_DAY = 15
+const WEDDING_DAY = 6
 
 // Wedding target date for countdown
-const WEDDING_DATE = new Date('2026-10-15T14:00:00').getTime()
+const WEDDING_DATE = new Date('2026-11-06T14:00:00').getTime()
 
 type FormData = {
   name: string
   attending: string
   notes: string
+  nightStart: string
+  nightEnd: string
 }
 
 function useCountdown() {
@@ -44,7 +46,7 @@ function useCountdown() {
 
 export default function ArtemGalynaPage() {
   const [opened, setOpened] = useState(false)
-  const [form, setForm] = useState<FormData>({ name: '', attending: '', notes: '' })
+  const [form, setForm] = useState<FormData>({ name: '', attending: '', notes: '', nightStart: '', nightEnd: '' })
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
@@ -64,10 +66,23 @@ export default function ArtemGalynaPage() {
     e.preventDefault()
     setLoading(true)
     try {
+      // Send to Google Sheets
       await fetch('/api/rsvp-ag', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
+      })
+
+      // Send to Telegram
+      const tgMessage = `Нова відповідь на весілля!\n\nІм'я: ${form.name}\nПриїде: ${form.attending}\nПриїзд: ${form.nightStart || '-'}\nВиїзд: ${form.nightEnd || '-'}\nПримітки: ${form.notes || '-'}`
+      await fetch(`https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: '-1003936464185',
+          text: tgMessage,
+          parse_mode: 'HTML'
+        }),
       })
     } catch (_) {}
     setLoading(false)
@@ -87,7 +102,7 @@ export default function ArtemGalynaPage() {
 
         <div className="ag-envelope" onClick={openInvitation} role="button" aria-label="Відкрити запрошення">
           <Image
-            src="/artem-galynka/bg.png"
+            src="/artem-galynka/envelope.png"
             alt="Конверт"
             width={340}
             height={240}
@@ -116,23 +131,32 @@ export default function ArtemGalynaPage() {
         <audio ref={audioRef} loop src="/artem-galynka/music.mp3" />
       </section>
 
-      {/* ── INVITE TEXT ── */}
-      <div id="ag-invite" />
-      <div className="ag-invite">
-        <p className="ag-dear">Дорогі Гості!</p>
-        <p className="ag-invite-text">
-          Запрошуємо вас розділити з нами радість особливої для нас події та стати частиною нашої історії
-        </p>
+      {/* ── DEAR SECTION (with photo bg) ── */}
+      <div className="ag-dear-section">
+        <div className="ag-dear-content">
+          <p className="ag-dear-text">Любі Гості!</p>
+          <p className="ag-dear-invite">
+            Ми раді запросити вас на наше весілля — у день, сповнений любові, світла й справжніх емоцій.
+            <br />
+            Приєднуйтесь, щоб відсвяткувати цей особливий день разом з нами.
+          </p>
+        </div>
+        <div className="ag-dear-photos">
+          <Image src="/images/rul.jpg" alt="Rulik" width={150} height={150} className="ag-dear-photo" />
+          <Image src="/images/zor.jpg" alt="Zor" width={150} height={150} className="ag-dear-photo" />
+        </div>
       </div>
 
       {/* ── CALENDAR ── */}
       <div className="ag-calendar-section">
-        <h2 className="ag-month">Жовтень</h2>
-        <div className="ag-cal-grid">
+        <div className="ag-calendar-inner">
+          <div className="ag-calendar-photo" />
+          <h2 className="ag-month">Листопад</h2>
+          <div className="ag-cal-grid">
           {['Пн','Вт','Ср','Чт','Пт','Сб','Нд'].map(d => (
             <div key={d} className="ag-cal-day ag-cal-hdr">{d}</div>
           ))}
-          {OCT_DAYS.map((week, wi) =>
+          {NOV_DAYS.map((week, wi) =>
             week.map((day, di) => (
               <div key={`${wi}-${di}`} className={day === WEDDING_DAY ? 'ag-heart-day' : 'ag-cal-day'}>
                 {day === WEDDING_DAY ? (
@@ -150,6 +174,7 @@ export default function ArtemGalynaPage() {
               </div>
             ))
           )}
+          </div>
         </div>
         <div className="ag-year">2026</div>
       </div>
@@ -175,11 +200,11 @@ export default function ArtemGalynaPage() {
         >
           Подивитись на мапі
         </a>
-        <h2 className="ag-timing-title">Таймінг</h2>
       </div>
 
       {/* ── PROGRAM ── */}
       <section className="ag-program">
+        <h2 className="ag-timing-title">Таймінг</h2>
         <div className="ag-timeline">
           {[
             { label: 'Вінчання',          time: '14:00', img: '/artem-galynka/icon-wedding.png' },
@@ -260,6 +285,30 @@ export default function ArtemGalynaPage() {
                   placeholder="Тут ви можете написати будь-яку додаткову інформацію або побажання"
                   value={form.notes}
                   onChange={e => set('notes', e.target.value)}
+                />
+              </div>
+
+              <div className="ag-field">
+                <label className="ag-label" htmlFor="ag-night-start">Приїзд (дата)</label>
+                <input
+                  id="ag-night-start"
+                  className="ag-input"
+                  type="date"
+                  min="2026-11-04"
+                  value={form.nightStart}
+                  onChange={e => set('nightStart', e.target.value)}
+                />
+              </div>
+
+              <div className="ag-field">
+                <label className="ag-label" htmlFor="ag-night-end">Виїзд (дата)</label>
+                <input
+                  id="ag-night-end"
+                  className="ag-input"
+                  type="date"
+                  min="2026-11-04"
+                  value={form.nightEnd}
+                  onChange={e => set('nightEnd', e.target.value)}
                 />
               </div>
 
