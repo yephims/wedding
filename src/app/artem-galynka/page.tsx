@@ -99,7 +99,7 @@ export default function ArtemGalynaPage() {
         <div className={`ag-full-photo${opened ? ' show' : ''}`} aria-hidden={!opened}>
           <Image src="/artem-galynka/photo-couple.jpg" alt="Artem & Galinka" fill style={{ objectFit: 'cover', filter: 'grayscale(40%)' }} />
           <div className="ag-photo-gradient" />
-          <div className="ag-photo-caption">Artem &amp; Galinka</div>
+          <div className="ag-photo-caption">Artem &amp; Halynka</div>
           <div className="ag-timer-wrap">
             <div className="ag-timer-title">До нашого весілля залишилось:</div>
             <div className="ag-timer">
@@ -185,10 +185,12 @@ export default function ArtemGalynaPage() {
         <h2 className="ag-timing-title">Таймінг</h2>
         <div className="ag-timeline">
           {[
-            { label: 'Вінчання',          time: '14:00', img: '/artem-galynka/icon-wedding.png' },
-            { label: 'Банкет',            time: '15:00', img: '/artem-galynka/icon-dinner.png' },
-            { label: 'Перерва',           time: '17:30', img: '/artem-galynka/icon-break.png' },
-            { label: 'Завершення вечора', time: '20:00', img: '/artem-galynka/icon-party.png' },
+            { label: 'Вінчання',           time: '13:00', img: '/artem-galynka/icon-wedding.png' },
+            { label: 'Бенкет',             time: '15:00', img: '/artem-galynka/icon-dinner.png' },
+            { label: 'Перерва',            time: '17:00', img: '/artem-galynka/icon-break.png' },
+            { label: 'Бенкет',             time: '18:30', img: '/artem-galynka/icon-dinner.png' },
+            { label: 'Весільний торт',     time: '20:30', img: '/artem-galynka/icon-party.png' },
+            { label: 'Закінчення свята',   time: '21:00', img: '/artem-galynka/icon-break.png' },
           ].map((item, i) => (
             <div key={i} className="ag-trow">
               <div className="ag-tleft">{item.label}</div>
@@ -213,6 +215,8 @@ export default function ArtemGalynaPage() {
           <div className="ag-palette">
             <div className="ag-color-circle" style={{ background: '#572733' }} />
             <div className="ag-color-circle" style={{ background: '#656a52' }} />
+            <div className="ag-color-circle" style={{ background: '#f0e2d5' }} />
+            <div className="ag-color-circle" style={{ background: '#d7c6b6' }} />
           </div>
         </div>
       </div>
@@ -275,7 +279,7 @@ export default function ArtemGalynaPage() {
 
         <div style={{ marginTop: 60 }}>
           <p className="ag-love"><span className="ag-heart-icon">&#10084;</span><br />З любовʼю</p>
-          <p className="ag-names">Artem<br />&amp;<br />Galinka</p>
+          <p className="ag-names">Artem<br />&amp;<br />Halynka</p>
         </div>
       </div>
 
