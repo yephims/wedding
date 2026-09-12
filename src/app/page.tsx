@@ -227,10 +227,9 @@ export default function Home() {
             </p>
             <a
               href="https://wishpicks.com/wishlist/d62f01a9-0f4d-433d-86d0-df5dc9daf902"
-              className="map-btn"
+              className="wishlist-btn"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ marginTop: 20, display: 'inline-block' }}
             >
               Список побажань 🎁
             </a>

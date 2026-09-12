@@ -300,6 +300,25 @@ body {
   background: rgba(0,0,0,0.1);
 }
 
+.wishlist-btn {
+  display: inline-block;
+  margin-top: 24px;
+  padding: 12px 48px;
+  border-radius: 50px;
+  background: #3a5a3e;
+  color: #fffcea !important;
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: 19px;
+  text-decoration: none;
+  border: 2px solid #3a5a3e;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25), 0 1px 4px rgba(0,0,0,0.15);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.wishlist-btn:hover {
+  background: #2e4831;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+}
+
 /* ─── DRESS CODE SECTION (section_5, light) ─── */
 .dresscode-section {
   background-color: #fff;
