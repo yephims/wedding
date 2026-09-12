@@ -77,6 +77,7 @@ export default function ArtemGalynaPage() {
   const pad = (n: number) => String(n).padStart(2, '0')
 
   return (
+    <>
     <div style={{ background: '#faf3eb', minHeight: '100vh', fontFamily: "'Playfair Display', Georgia, serif" }}>
 
       {/* ── HERO ── */}
@@ -229,7 +230,20 @@ export default function ArtemGalynaPage() {
         </p>
         <div className="ag-form-wrap">
           {submitted ? (
-            <p className="ag-success">Дякуємо! Чекаємо на вас 🤍</p>
+            <div className="ag-success-wrap">
+              <p className="ag-success">Дякуємо! Чекаємо на вас 🤍</p>
+              <p className="ag-tg-text">
+                Приєднуйтесь до групи гостей у Telegram — там буде вся актуальна інформація про весілля.
+              </p>
+              <a
+                href="https://t.me/+8kXqshWi9-MzZGNi"
+                className="ag-tg-btn"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                ✈️ Приєднатись до групи гостей
+              </a>
+            </div>
           ) : (
             <form onSubmit={handleSubmit}>
               <div className="ag-field">
@@ -284,5 +298,16 @@ export default function ArtemGalynaPage() {
       </div>
 
     </div>
+    <div className="ag-footer">
+      <a
+        href="https://t.me/+8kXqshWi9-MzZGNi"
+        className="ag-footer-tg"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        група в Telegram
+      </a>
+    </div>
+    </>
   )
 }
