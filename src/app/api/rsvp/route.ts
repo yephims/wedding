@@ -7,20 +7,22 @@ const SHEETS_URL =
 export async function POST(req: NextRequest) {
   try {
     const data = await req.json()
-    const { name, attending, accommodation, nightStart, nightEnd } = data
+    const { name, attending, accommodation, nightStart, nightEnd, comment } = data
 
     // ── 1. Telegram ──────────────────────────────────────────
+    const attendingIcon = attending?.startsWith('Так') ? '✅' : '❌'
     const lines = [
       '🌿 *Нове підтвердження присутності*',
       '',
       `👤 *Імʼя:* ${name}`,
-      `✅ *Присутність:* ${attending}`,
+      `${attendingIcon} *Присутність:* ${attending}`,
       `🏨 *Ночівля:* ${accommodation}`,
     ]
     if (accommodation?.startsWith('Так') && nightStart) {
       lines.push(`📅 *З:* ${nightStart}`)
       lines.push(`📅 *До:* ${nightEnd}`)
     }
+    if (comment?.trim()) lines.push(`💬 *Коментар:* ${comment}`)
 
     const token = process.env.BOT_TOKEN
     if (token) {
@@ -50,6 +52,7 @@ export async function POST(req: NextRequest) {
       form_night: accommodation,
       form_night_start: nightStart ?? '',
       form_night_end: nightEnd ?? '',
+      form_comment: comment ?? '',
     }
 
     const sheetsRes = await fetch(

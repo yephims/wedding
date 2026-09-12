@@ -20,6 +20,7 @@ type FormData = {
   accommodation: string
   nightStart: string
   nightEnd: string
+  comment: string
 }
 
 export default function Home() {
@@ -29,6 +30,7 @@ export default function Home() {
     accommodation: '',
     nightStart: '',
     nightEnd: '',
+    comment: '',
   })
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -192,9 +194,10 @@ export default function Home() {
         <h2 className="section-title-cream">Програма дня</h2>
         <div className="timeline">
           {[
-            { label: 'Зустріч гостей', time: '14:00', img: '/images/timeline-1.png' },
-            { label: 'Церемонія',       time: '15:00', img: '/images/timeline-2.png' },
-            { label: 'Банкет',          time: '16:00', img: '/images/timeline-3.png' },
+            { label: 'Збір гостей',                    time: '11:00', img: '/images/timeline-1.png' },
+            { label: 'Вінчання',                       time: '12:00', img: '/images/timeline-2.png' },
+            { label: 'Привітання / фото з молодятами', time: '12:40', img: '/images/timeline-3.png' },
+            { label: 'Фуршет',                         time: '14:00', img: '/images/timeline-1.png' },
           ].map((item, i) => (
             <div key={i} className="timeline-row">
               <div className="t-left">{item.label}</div>
@@ -222,6 +225,15 @@ export default function Home() {
               Приємним компліментом для нас буде, якщо замість квітів ви вирішите обрати щось із нашого списку побажань.
               Кожен подарунок стане для нас частинкою турботи та нагадуванням про цей особливий день.
             </p>
+            <a
+              href="https://wishpicks.com/wishlist/d62f01a9-0f4d-433d-86d0-df5dc9daf902"
+              className="map-btn"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ marginTop: 20, display: 'inline-block' }}
+            >
+              Список побажань 🎁
+            </a>
           </section>
         </div>
       </div>
@@ -317,6 +329,20 @@ export default function Home() {
                       </div>
                     </div>
                   )}
+                </div>
+
+                {/* Comment */}
+                <div className="form-field">
+                  <label className="form-label" htmlFor="rsvp-comment">Коментар (необов'язково)</label>
+                  <textarea
+                    id="rsvp-comment"
+                    className="form-input"
+                    placeholder="Якщо є побажання або додаткова інформація"
+                    rows={3}
+                    value={form.comment}
+                    onChange={e => set('comment', e.target.value)}
+                    style={{ resize: 'vertical' }}
+                  />
                 </div>
 
                 <div style={{ textAlign: 'center' }}>
