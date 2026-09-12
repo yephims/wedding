@@ -144,6 +144,14 @@
 
 .ag-time-label { font-size: 10px; color: #6b3a42; }
 
+/* ── INVITE + CALENDAR WRAPPER ── */
+.ag-invite-calendar-wrap {
+  background-image: url('/artem-galynka/program-bg.png');
+  background-size: cover;
+  background-position: center;
+  padding-bottom: 40px;
+}
+
 /* ── INVITE TEXT ── */
 .ag-invite {
   padding: 40px 20px 20px;
@@ -176,6 +184,7 @@
 
 .ag-calendar-inner {
   position: relative;
+  padding: 20px 50px 60px;
 }
 
 .ag-calendar-photo {
@@ -191,7 +200,9 @@
 
 .ag-month {
   font-family: 'Great Vibes', cursive;
-  font-size: 58px; color: #3f1f26;
+  font-size: 58px;
+  font-weight: 400;
+  color: #3f1f26;
   margin: 0 0 10px;
 }
 
@@ -274,12 +285,12 @@
 
 .ag-venue-name {
   font-family: 'Playfair Display', serif;
-  font-size: 18px; color: #572733; margin-bottom: 6px;
+  font-size: 22px; color: #572733; margin-bottom: 12px;
 }
 
 .ag-venue-addr {
   font-family: 'Playfair Display', serif;
-  font-size: 15px; color: #7a5060; margin-bottom: 20px;
+  font-size: 18px; color: #7a5060; margin-bottom: 30px;
 }
 
 .ag-map-btn {
@@ -356,21 +367,30 @@
 
 /* ── DRESS CODE ── */
 .ag-dresscode {
-  background: #faf3eb;
-  padding: 40px 20px;
+  background: linear-gradient(180deg, rgba(249,246,242,0.57) 0%, rgba(255,255,255,0) 58%, #f9f6f2 100%),
+    url('/artem-galynka/bg2.png');
+  background-size: cover;
+  background-position: center;
+  padding-top: 14px;
+  padding-bottom: 22px;
+  margin-top: 1px;
   text-align: center;
   max-width: 33%;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
+/* inner wrapper with dresscode-bg photo, matches et_pb_row_3 offsets */
 .ag-dresscode-inner {
   background-image: url('/artem-galynka/dresscode-bg.png');
-  background-size: contain;
+  background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
   padding-top: 154px;
   padding-bottom: 0;
   margin-top: -116px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .ag-section-title {
@@ -493,6 +513,11 @@
   padding: 30px 0; font-family: 'Playfair Display', serif;
 }
 
+.ag-heart-icon {
+  font-size: 36px;
+  color: #572733;
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 980px) {
   .ag-invite, .ag-calendar-section, .ag-venue,
@@ -507,7 +532,21 @@
   .ag-timer-title { font-size: 16px; }
   .ag-tleft { font-size: 16px; }
   .ag-tright { font-size: 26px; }
-  .ag-names { font-size: 38px; }
+  .ag-invite{ width: 80%; margin: 0 auto;}
+  .ag-calendar-section {padding: 150px 40px; margin: 0; background-image: url('/artem-galynka/calendar-photo.png');     background-size: cover;
+    background-position: 50%;
+    background-repeat: no-repeat;}
+  .ag-calendar-inner {padding-bottom: 20px;}
+  .ag-heart-day {width: 44px; height: 44px;}
+  .ag-heart-img {width: 48px; height: 48px; top: 60%;}
+  .ag-venue {padding-top: 34px;}
+  .ag-venue-title {margin-bottom: 40px;}
+  .ag-venue-img {max-width: 100%; height: auto;}
+  .ag-venue-name { margin: 40px auto;}
+  .ag-map-btn {margin: 60px 0;}
+  .ag-dresscode .ag-section-title { margin: 40px auto 70px; font-weight: normal;}
+  .ag-dresscode .ag-section-text { margin: 0 20% 45px;}
+  .ag-palette {padding: 0 0 200px;}
 }
 
 @media (max-width: 480px) {

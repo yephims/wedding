@@ -116,45 +116,45 @@ export default function ArtemGalynaPage() {
         <audio ref={audioRef} loop src="/artem-galynka/music.mp3" />
       </section>
 
-      {/* ── INVITE TEXT ── */}
-      <div id="ag-invite" />
-      <div className="ag-invite">
-        <p className="ag-dear">Дорогі Гості!</p>
-        <p className="ag-invite-text">
-          Запрошуємо вас розділити з нами радість особливої для нас події та стати частиною нашої історії
-        </p>
-      </div>
-
-      {/* ── CALENDAR ── */}
-      <div className="ag-calendar-section">
-        <div className="ag-calendar-inner">
-          <div className="ag-calendar-photo" />
-          <h2 className="ag-month">Жовтень</h2>
-          <div className="ag-cal-grid">
-            {['Пн','Вт','Ср','Чт','Пт','Сб','Нд'].map(d => (
-              <div key={d} className="ag-cal-day ag-cal-hdr">{d}</div>
-            ))}
-            {OCT_DAYS.map((week, wi) =>
-              week.map((day, di) => (
-                <div key={`${wi}-${di}`} className={day === WEDDING_DAY ? 'ag-heart-day' : 'ag-cal-day'}>
-                  {day === WEDDING_DAY ? (
-                    <>
-                      <span className="ag-day-num">{day}</span>
-                      <Image
-                        src="/artem-galynka/icon-wedding.png"
-                        alt="♥"
-                        width={56}
-                        height={56}
-                        className="ag-heart-img"
-                      />
-                    </>
-                  ) : (day ?? '')}
-                </div>
-              ))
-            )}
-          </div>
+      {/* ── INVITE + CALENDAR ── */}
+      <div id="ag-invite" className="ag-invite-calendar-wrap">
+        <div className="ag-invite">
+          <p className="ag-dear">Дорогі Гості!</p>
+          <p className="ag-invite-text">
+            Запрошуємо вас розділити з нами радість особливої для нас події та стати частиною нашої історії
+          </p>
         </div>
-        <div className="ag-year">2026</div>
+
+        <div className="ag-calendar-section">
+          <div className="ag-calendar-inner">
+            <div className="ag-calendar-photo" />
+            <h2 className="ag-month">Жовтень</h2>
+            <div className="ag-cal-grid">
+              {['Пн','Вт','Ср','Чт','Пт','Сб','Нд'].map(d => (
+                <div key={d} className="ag-cal-day ag-cal-hdr">{d}</div>
+              ))}
+              {OCT_DAYS.map((week, wi) =>
+                week.map((day, di) => (
+                  <div key={`${wi}-${di}`} className={day === WEDDING_DAY ? 'ag-heart-day' : 'ag-cal-day'}>
+                    {day === WEDDING_DAY ? (
+                      <>
+                        <span className="ag-day-num">{day}</span>
+                        <Image
+                          src="/artem-galynka/heart.png"
+                          alt="heart"
+                          width={56}
+                          height={56}
+                          className="ag-heart-img"
+                        />
+                      </>
+                    ) : (day ?? '')}
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+          <div className="ag-year">2026</div>
+        </div>
       </div>
 
       {/* ── VENUE ── */}
@@ -163,13 +163,13 @@ export default function ArtemGalynaPage() {
         <Image
           src="/artem-galynka/liteplo.png"
           alt="Літепло"
-          width={320}
-          height={160}
+          width={400}
+          height={200}
           className="ag-venue-img"
           style={{ borderRadius: 60 }}
         />
         <p className="ag-venue-name"><strong>«ЛІТЕПЛО»</strong></p>
-        <p className="ag-venue-addr">Kobzarivka, Ternopil Oblast</p>
+        <p className="ag-venue-addr"> Адреса: <br></br><br></br>Kobzarivka, Ternopil Oblast</p>
         <a
           href="https://maps.app.goo.gl/yudcTGe4TQGTor6z7"
           className="ag-map-btn"
@@ -178,11 +178,11 @@ export default function ArtemGalynaPage() {
         >
           Подивитись на мапі
         </a>
-        <h2 className="ag-timing-title">Таймінг</h2>
       </div>
 
       {/* ── PROGRAM ── */}
       <section className="ag-program">
+        <h2 className="ag-timing-title">Таймінг</h2>
         <div className="ag-timeline">
           {[
             { label: 'Вінчання',          time: '14:00', img: '/artem-galynka/icon-wedding.png' },
@@ -205,13 +205,15 @@ export default function ArtemGalynaPage() {
 
       {/* ── DRESS CODE ── */}
       <div className="ag-dresscode">
-        <h2 className="ag-section-title">Дрес-код</h2>
-        <p className="ag-section-text">
-          Ми будемо дуже вдячні, якщо ви оберете наряди у кольорах нашого весілля:
-        </p>
-        <div className="ag-palette">
-          <div className="ag-color-circle" style={{ background: '#572733' }} />
-          <div className="ag-color-circle" style={{ background: '#656a52' }} />
+        <div className="ag-dresscode-inner">
+          <h2 className="ag-section-title">Дрес-код</h2>
+          <p className="ag-section-text">
+            Ми будемо дуже вдячні, якщо ви оберете наряди у кольорах нашого весілля:
+          </p>
+          <div className="ag-palette">
+            <div className="ag-color-circle" style={{ background: '#572733' }} />
+            <div className="ag-color-circle" style={{ background: '#656a52' }} />
+          </div>
         </div>
       </div>
 
@@ -227,7 +229,6 @@ export default function ArtemGalynaPage() {
           ) : (
             <form onSubmit={handleSubmit}>
               <div className="ag-field">
-                <label className="ag-label" htmlFor="ag-name">Ваше імʼя та прізвище</label>
                 <input
                   id="ag-name"
                   className="ag-input"
@@ -254,9 +255,6 @@ export default function ArtemGalynaPage() {
               </div>
 
               <div className="ag-field">
-                <label className="ag-label" htmlFor="ag-notes">
-                  Тут ви можете написати будь-яку додаткову інформацію або побажання
-                </label>
                 <textarea
                   id="ag-notes"
                   className="ag-input ag-textarea"
@@ -276,7 +274,7 @@ export default function ArtemGalynaPage() {
         </div>
 
         <div style={{ marginTop: 60 }}>
-          <p className="ag-love">З любовʼю</p>
+          <p className="ag-love"><span className="ag-heart-icon">&#10084;</span><br />З любовʼю</p>
           <p className="ag-names">Artem<br />&amp;<br />Galinka</p>
         </div>
       </div>
