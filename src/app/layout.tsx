@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Рулік та Зоря — Весілля 15 листопада 2026',
+  title: 'Рулік та Зоря — Весілля 6 листопада 2026',
   description: 'Запрошення на весілля Руліка та Зорі',
 }
 
