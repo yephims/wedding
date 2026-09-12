@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-// Same Telegram chat, different bot prefix so it's easy to distinguish
 const CHAT_ID = '-1004300029409'
 
 export async function POST(req: NextRequest) {
@@ -9,7 +8,7 @@ export async function POST(req: NextRequest) {
     const { name, attending, notes } = data
 
     const lines = [
-      '🤍 *Artem & Galinka — нова відповідь*',
+      '💍 *Artem & Galinka — нова відповідь*',
       '',
       `👤 *Імʼя:* ${name}`,
       `✅ *Присутність:* ${attending}`,
