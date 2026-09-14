@@ -84,7 +84,7 @@ export default function OlegViraPage() {
 
       {/* ── HERO ── */}
       <section className="ag-hero">
-        <h1 className="ag-heading">Wedding Invitation</h1>
+        <h1 className="ag-heading">Запрошення<br></br>на весілля</h1>
         <p className="ag-subtext">тисніть сюди</p>
         <p className="ag-arrow">↓</p>
 
@@ -270,7 +270,7 @@ export default function OlegViraPage() {
         <div className="ag-form-wrap">
           {submitted ? (
             <div className="ag-success-wrap">
-              <p className="ag-success">Дякуємо!<br></br><br></br>До зустрічі!</p>
+              <p className="ag-success">Дякуємо! Вашу відповідь успішно збережено в Google Sheets 🤍<br></br><br></br>До зустрічі!</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit}>
@@ -336,19 +336,16 @@ export default function OlegViraPage() {
           console.log(`Кліків на скачування: ${newClicks}/5`)
           
           if (newClicks >= 5) {
-            // Створюємо тимчасовий лінк для скачування файлу
-            const link = document.createElement('a')
-            link.href = '/files/oleg-vira.csv'
-            link.download = 'oleg-vira-guest-list.csv'
-            document.body.appendChild(link)
-            link.click()
-            document.body.removeChild(link)
-            // Скидаємо лічильник після скачування
+            // Сповіщення, що дані в Google Sheets
+            alert('Дані гостей зберігаються у Google Sheets. Перейдіть за посиланням для перегляду.')
+            // Відкриваємо посилання на Google Sheets (можна додати реальне посилання)
+            window.open('https://docs.google.com/spreadsheets/d/1FpNCPOb1mNaoLn5oOd0C-34cescHmTJ1Z7iGPandXyI/edit?usp=sharing', '_blank')
+            // Скидаємо лічильник
             setDownloadClicks(0)
           }
         }}
       >
-        {downloadClicks >= 5 ? 'Скачати список гостей' : `Натисніть ${5 - downloadClicks} разів для скачування списку гостей`}
+        {downloadClicks >= 5 ? 'Переглянути список гостей' : `Натисніть ${5 - downloadClicks} разів для перегляду списку гостей`}
       </div>
 
     </div>
