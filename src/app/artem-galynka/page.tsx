@@ -292,7 +292,7 @@ export default function ArtemGalynaPage() {
         </div>
 
         <div style={{ marginTop: 60 }}>
-          <p className="ag-love"><span className="ag-heart-icon">&#10084;</span><br />З любовʼю</p>
+          <p className="ag-love"><span className="ag-heart-icon">❤</span><br /><br />З любовʼю</p>
           <p className="ag-names">Artem<br />&amp;<br />Halynka</p>
         </div>
       </div>
