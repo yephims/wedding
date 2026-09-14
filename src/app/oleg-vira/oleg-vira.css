@@ -1,4 +1,4 @@
-/* ─── ArGa page — isolated styles, no globals override ─── */
+/* ─── Oleg & Vira page — isolated styles, no globals override ─── */
 
 .ag-page {
   font-family: 'Playfair Display', Georgia, "Times New Roman", serif;
@@ -61,8 +61,8 @@
 }
 
 .ag-envelope {
-  width: 340px;
-  height: 240px;
+  width: auto;
+  height: auto;
   cursor: pointer;
   margin-top: 60px;
   animation: ag-float 2s ease infinite;
@@ -145,12 +145,6 @@
 .ag-time-label { font-size: 10px; color: #6b3a42; }
 
 /* ── INVITE + CALENDAR WRAPPER ── */
-.ag-invite-calendar-wrap {
-  background-image: url('/artem-galynka/program-bg.png');
-  background-size: cover;
-  background-position: center;
-  padding-bottom: 40px;
-}
 
 /* ── INVITE TEXT ── */
 .ag-invite {
@@ -259,9 +253,6 @@
 
 /* ── VENUE ── */
 .ag-venue {
-  background-image: url('/artem-galynka/bg2.png');
-  background-size: cover;
-  background-position: center;
   padding: 17px 20px 30px;
   text-align: center;
   max-width: 33%;
@@ -271,7 +262,7 @@
 .ag-venue-title {
   font-family: 'Great Vibes', cursive;
   font-size: 49px; color: #572733;
-  margin-top: 102px; margin-bottom: 19px;
+  margin-top: 0; margin-bottom: 19px;
   line-height: 1.1;
 }
 
@@ -289,7 +280,7 @@
 }
 
 .ag-venue-addr {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Playfair Display', serif; letter-spacing: 1px;
   font-size: 18px; color: #7a5060; margin-bottom: 30px;
 }
 
@@ -317,62 +308,15 @@
 
 /* ── PROGRAM ── */
 .ag-program {
-  background-image: url('/artem-galynka/program-bg.png');
-  background-size: cover;
-  background-position: center top;
   padding: 40px 20px;
-  text-align: center;
 }
 
-.ag-timeline {
-  max-width: 640px; margin: 0 auto;
-  font-family: 'Playfair Display', serif;
-  text-transform: uppercase; letter-spacing: 1px;
-}
 
-.ag-trow {
-  display: flex; align-items: center;
-  justify-content: space-between;
-  margin-bottom: 60px;
-}
-
-.ag-tleft {
-  width: 30%; font-size: 22px;
-  color: #572733; text-align: center;
-  font-family: 'Playfair Display', serif;
-}
-
-.ag-tright {
-  width: 30%; font-size: 36px;
-  color: rgba(87,39,51,0.85); text-align: center;
-  letter-spacing: 3px;
-}
-
-.ag-tcenter {
-  width: 60px; display: flex;
-  flex-direction: column; align-items: center;
-}
-
-.ag-tcenter img {
-  width: 60px; height: 60px;
-  filter: grayscale(100%) brightness(0%);
-  z-index: 2;
-}
-
-.ag-line {
-  width: 2px; background: #999;
-}
-.ag-line.top { height: 50px; margin-bottom: 8px; }
-.ag-line.bot { height: 50px; margin-top: 8px; }
 
 /* ── DRESS CODE ── */
 .ag-dresscode {
-  background: linear-gradient(180deg, rgba(249,246,242,0.57) 0%, rgba(255,255,255,0) 58%, #f9f6f2 100%),
-    url('/artem-galynka/bg2.png');
-  background-size: cover;
-  background-position: center;
   padding-top: 14px;
-  padding-bottom: 22px;
+  padding-bottom: 0;
   margin-top: 1px;
   text-align: center;
   max-width: 33%;
@@ -406,12 +350,12 @@
 }
 
 .ag-palette {
-  display: flex; gap: 12px;
+  display: flex; gap: 10px;
   justify-content: center; padding: 20px;
 }
 
 .ag-color-circle {
-  width: 60px; height: 60px;
+  width: 50px; height: 50px;
   border-radius: 50%;
   border: 1px solid rgba(0,0,0,0.1);
 }
@@ -494,7 +438,8 @@
 .ag-submit:hover { background: #f5ede6; }
 
 .ag-love {
-  font-size: 32px; color: #572733;
+  font-family: 'Great Vibes', cursive;
+  font-size: 57px; color: #572733;
   padding-bottom: 30px; margin-bottom: 9px;
   text-align: center;
 }
@@ -502,7 +447,7 @@
 .ag-names {
   font-family: 'Playfair Display', serif;
   font-size: 56px; color: #572733;
-  line-height: 1; margin-bottom: 88px;
+  line-height: 1; margin-bottom: 288px;
   text-align: center;
 }
 
@@ -587,7 +532,7 @@
   .ag-venue-title {margin-bottom: 40px;}
   .ag-venue-img {max-width: 100%; height: auto;}
   .ag-venue-name { margin: 40px auto;}
-  .ag-map-btn {margin: 60px 0;}
+  .ag-map-btn {margin: 0;}
   .ag-dresscode .ag-section-title { margin: 40px auto 70px; font-weight: normal;}
   .ag-dresscode .ag-section-text { margin: 0 20% 45px;}
   .ag-palette {padding: 0 0 200px;}
@@ -596,7 +541,166 @@
 @media (max-width: 480px) {
   .ag-hero { height: 700px; padding-top: 40px; }
   .ag-heading { font-size: 50px; }
-  .ag-envelope { width: 280px; height: 200px; margin-top: 70px; }
+  .ag-envelope {  margin-top: 70px; }
   .ag-photo-caption { font-size: 52px; bottom: 200px; }
   .ag-cal-grid { gap: 4px; }
+}
+/* ── NEW TIMELINE STYLES ── */
+.ov-timeline {
+  max-width: 360px;
+  width: 100%;
+  margin: 40px auto 60px;
+  padding: 0 20px;
+}
+
+.ov-event {
+  position: relative;
+  padding-left: 28px;
+  padding-bottom: 36px;
+  border-left: 1px solid #d8d3ca;
+}
+
+.ov-event:last-child {
+  border-left: 1px solid transparent;
+  padding-bottom: 0;
+}
+
+.ov-event::before {
+  content: "♡";
+  position: absolute;
+  left: -11px;
+  top: 0;
+  background: #f6f4f0;
+  color: #3a3a3a;
+  font-size: 22px;
+  line-height: 1;
+  padding: 2px 0;
+}
+
+.ov-time {
+  font-size: 24px;
+  color: #3a3a3a;
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+  font-family: 'Playfair Display', serif;
+}
+
+.ov-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2a2a2a;
+  margin-bottom: 8px;
+  font-family: 'Playfair Display', serif;
+}
+
+.ov-description {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #5a5a5a;
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+}
+
+.ov-timing-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 49px; color: #572733;
+  margin-top: 15px; margin-bottom: 20px;
+  line-height: 1.1;
+  text-align: center;
+}
+/* ── PHOTOS SECTION ── */
+.ov-photos {
+  padding: 10px 20px 60px;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.ov-photos-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 49px; 
+  color: #572733;
+  margin-bottom: 40px;
+  line-height: 1.1;
+}
+
+.ov-photos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.ov-photo-top {
+  grid-column: 1 / 3;
+  margin-bottom: 10px;
+}
+
+.ov-photo {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.ov-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Responsive for photos */
+@media (max-width: 767px) {
+  .ov-photos {
+    padding: 0 16px 40px;
+    max-width: 100%;
+  }
+  
+  .ov-photos-grid {
+    gap: 15px;
+  }
+  
+  .ov-photos-title {
+    font-size: 42px;
+    margin-bottom: 30px;
+  }
+}
+/* ── DOWNLOAD BUTTON ── */
+.ov-download-btn {
+  position: absolute;
+  opacity: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background-color: rgba(87, 39, 51, 0.85); /* Напівпрозорий колір */
+  backdrop-filter: blur(5px);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.ov-download-btn:hover {
+  background-color: rgba(87, 39, 51, 0.95);
+}
+
+.ov-download-btn:active {
+  background-color: rgba(87, 39, 51, 1);
+  transform: translateY(1px);
+}
+
+/* Responsive for download button */
+@media (max-width: 767px) {
+  .ov-download-btn {
+    font-size: 14px;
+    padding: 0 10px;
+  }
 }

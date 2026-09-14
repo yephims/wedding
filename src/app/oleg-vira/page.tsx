@@ -1,9 +1,10 @@
 'use client'
 
 import Image from 'next/image'
+import { relative } from 'path'
 import { useState, useRef, useEffect } from 'react'
 
-// Жовтень 2026: 15 жовтня = четвер (індекс 3 в сітці Пн-Нд)
+// Жовтень 2026: 10 жовтня = субота (індекс 5 в сітці Пн-Нд)
 const OCT_DAYS = [
   [null, null, null, 1, 2, 3, 4],
   [5, 6, 7, 8, 9, 10, 11],
@@ -11,15 +12,15 @@ const OCT_DAYS = [
   [19, 20, 21, 22, 23, 24, 25],
   [26, 27, 28, 29, 30, 31, null],
 ]
-const WEDDING_DAY = 15
+const WEDDING_DAY = 10
 
-// Wedding target date for countdown
-const WEDDING_DATE = new Date('2026-10-15T14:00:00').getTime()
+// Wedding target date for countdown - 10 жовтня 2026
+const WEDDING_DATE = new Date('2026-10-10T14:00:00').getTime()
 
 type FormData = {
   name: string
   attending: string
-  notes: string
+  guestsCount: string
 }
 
 function useCountdown() {
@@ -42,11 +43,12 @@ function useCountdown() {
   return time
 }
 
-export default function ArtemGalynaPage() {
+export default function OlegViraPage() {
   const [opened, setOpened] = useState(false)
-  const [form, setForm] = useState<FormData>({ name: '', attending: '', notes: '' })
+  const [form, setForm] = useState<FormData>({ name: '', attending: '', guestsCount: '' })
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [downloadClicks, setDownloadClicks] = useState(0)
   const audioRef = useRef<HTMLAudioElement>(null)
   const timer = useCountdown()
 
@@ -56,7 +58,7 @@ export default function ArtemGalynaPage() {
     setOpened(true)
     audioRef.current?.play().catch(() => {})
     setTimeout(() => {
-      document.getElementById('ag-invite')?.scrollIntoView({ behavior: 'smooth' })
+      document.getElementById('ag-invite')
     }, 900)
   }
 
@@ -64,7 +66,7 @@ export default function ArtemGalynaPage() {
     e.preventDefault()
     setLoading(true)
     try {
-      await fetch('/api/rsvp-ag', {
+      await fetch('/api/rsvp-ov', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
@@ -78,7 +80,7 @@ export default function ArtemGalynaPage() {
 
   return (
     <>
-    <div style={{ background: '#faf3eb', minHeight: '100vh', fontFamily: "'Playfair Display', Georgia, serif" }}>
+    <div style={{ position:"relative", background: '#faf3eb', minHeight: '100vh', fontFamily: "'Playfair Display', Georgia, serif" }}>
 
       {/* ── HERO ── */}
       <section className="ag-hero">
@@ -98,9 +100,9 @@ export default function ArtemGalynaPage() {
 
         {/* Full photo after click */}
         <div className={`ag-full-photo${opened ? ' show' : ''}`} aria-hidden={!opened}>
-          <Image src="/artem-galynka/photo-couple.jpg" alt="Artem & Galinka" fill style={{ objectFit: 'cover', filter: 'grayscale(40%)' }} />
+          <Image src="/oleg-vira/foto-2.jpg" alt="Олег & Віра" fill style={{ objectFit: 'cover', filter: 'grayscale(40%)' }} />
           <div className="ag-photo-gradient" />
-          <div className="ag-photo-caption">Artem &amp; Halynka</div>
+          <div className="ag-photo-caption">Олег &amp; Віра</div>
           <div className="ag-timer-wrap">
             <div className="ag-timer-title">До нашого весілля залишилось:</div>
             <div className="ag-timer">
@@ -122,8 +124,12 @@ export default function ArtemGalynaPage() {
         <div className="ag-invite">
           <p className="ag-dear">Дорогі Гості!</p>
           <p className="ag-invite-text">
-            Запрошуємо вас розділити з нами радість особливої для нас події та стати частиною нашої історії
-          </p>
+Господь поєднує наші долі, тож
+запрошуємо Вас
+благословити нас на нове
+життя та розділити радість
+цього особливого дня
+разом з нами!          </p>
         </div>
 
         <div className="ag-calendar-section">
@@ -161,18 +167,10 @@ export default function ArtemGalynaPage() {
       {/* ── VENUE ── */}
       <div className="ag-venue">
         <h2 className="ag-venue-title">Локація</h2>
-        <Image
-          src="/artem-galynka/liteplo.png"
-          alt="Літепло"
-          width={400}
-          height={200}
-          className="ag-venue-img"
-          style={{ borderRadius: 60 }}
-        />
-        <p className="ag-venue-name"><strong>«ЛІТЕПЛО»</strong></p>
-        <p className="ag-venue-addr"> Адреса: <br></br><br></br>Kobzarivka, Ternopil Oblast</p>
+
+        <p className="ag-venue-addr"> Адреса: <br></br>Кременчук<br></br>вул. Ціолковського, 16</p>
         <a
-          href="https://maps.app.goo.gl/yudcTGe4TQGTor6z7"
+          href="https://maps.app.goo.gl/E4gKGoukGW3yXAg96?g_st=atm"
           className="ag-map-btn"
           target="_blank"
           rel="noopener noreferrer"
@@ -183,26 +181,31 @@ export default function ArtemGalynaPage() {
 
       {/* ── PROGRAM ── */}
       <section className="ag-program">
-        <h2 className="ag-timing-title">Таймінг</h2>
-        <div className="ag-timeline">
-          {[
-            { label: 'Вінчання',           time: '13:00', img: '/artem-galynka/icon-wedding.png' },
-            { label: 'Бенкет',             time: '15:00', img: '/artem-galynka/icon-dinner.png' },
-            { label: 'Перерва',            time: '17:00', img: '/artem-galynka/icon-break.png' },
-            { label: 'Бенкет',             time: '18:30', img: '/artem-galynka/icon-dinner.png' },
-            { label: 'Весільний торт',     time: '20:30', img: '/artem-galynka/icon-party.png' },
-            { label: 'Закінчення свята',   time: '21:00', img: '/artem-galynka/icon-break.png' },
-          ].map((item, i) => (
-            <div key={i} className="ag-trow">
-              <div className="ag-tleft">{item.label}</div>
-              <div className="ag-tcenter">
-                <div className="ag-line top" />
-                <Image src={item.img} alt={item.label} width={60} height={60} style={{ filter: 'grayscale(100%) brightness(200%)' }} />
-                <div className="ag-line bot" />
-              </div>
-              <div className="ag-tright">{item.time}</div>
-            </div>
-          ))}
+        <h2 className="ov-timing-title">Розклад дня</h2>
+        <div className="ov-timeline">
+          <div className="ov-event">
+            <div className="ov-time">11:00</div>
+            <div className="ov-title">Вінчання</div>
+            <p className="ov-description">Приєднайтесь до нашої спільної молитви про благословення нашої сім'ї</p>
+          </div>
+          
+          <div className="ov-event">
+            <div className="ov-time">14:00</div>
+            <div className="ov-title">Перерва</div>
+            <p className="ov-description">Ви можете скористатися чудовою нагодою познайомитися з іншими гостями та відпочити</p>
+          </div>
+          
+          <div className="ov-event">
+            <div className="ov-time">14:30</div>
+            <div className="ov-title">Весільний бенкет</div>
+            <p className="ov-description">Найшильнішою пам'яттю для нас буде ваша щира участь, співи і теплі побажання. Хочемо, щоб атмосфера свята була неймовірною та врочистою</p>
+          </div>
+          
+          <div className="ov-event">
+            <div className="ov-time">19:00</div>
+            <div className="ov-title">Завершення свята</div>
+            <p className="ov-description">Час для привітання, спільних фото та теплих обіймів</p>
+          </div>
         </div>
       </section>
 
@@ -214,35 +217,60 @@ export default function ArtemGalynaPage() {
             Ми будемо дуже вдячні, якщо ви оберете наряди у кольорах нашого весілля:
           </p>
           <div className="ag-palette">
-            <div className="ag-color-circle" style={{ background: '#572733' }} />
-            <div className="ag-color-circle" style={{ background: '#656a52' }} />
-            <div className="ag-color-circle" style={{ background: '#f0e2d5' }} />
-            <div className="ag-color-circle" style={{ background: '#d7c6b6' }} />
+            <div className="ag-color-circle" style={{ background: '#F2B8B8' }} />
+            <div className="ag-color-circle" style={{ background: '#F8C3AA' }} />
+            <div className="ag-color-circle" style={{ background: '#F8DAD0' }} />
+            <div className="ag-color-circle" style={{ background: '#F4E2C7' }} />
+            <div className="ag-color-circle" style={{ background: '#D6B8A0' }} />
           </div>
         </div>
       </div>
 
+ {/* ── PHOTOS ── */}
+      <div className="ov-photos">
+        <h2 className="ov-photos-title">Наші моменти</h2>
+        <div className="ov-photos-grid">
+          <div className="ov-photo ov-photo-top">
+            <Image
+              src="/oleg-vira/foto-5.jpg"
+              alt="Олег та Віра"
+              width={600}
+              height={400}
+              style={{ width: '100%', height: 'auto' }}
+            />
+          </div>
+          <div className="ov-photo">
+            <Image
+              src="/oleg-vira/foto-4.jpg"
+              alt="Олег та Віра"
+              width={300}
+              height={400}
+              style={{ width: '100%', height: 'auto' }}
+            />
+          </div>
+          <div className="ov-photo">
+            <Image
+              src="/oleg-vira/foto-3.jpg"
+              alt="Олег та Віра"
+              width={300}
+              height={400}
+              style={{ width: '100%', height: 'auto' }}
+            />
+          </div>
+        </div>
+      </div>
+
+      
       {/* ── FORM ── */}
       <div className="ag-form-section">
         <h2 className="ag-form-title">Анкета гостя</h2>
         <p className="ag-form-subtitle">
-          Будь ласка, надайте вашу відповідь про присутність до 20.09.2026
+          Будь ласка, надайте вашу відповідь про присутність до 27.09.2026
         </p>
         <div className="ag-form-wrap">
           {submitted ? (
             <div className="ag-success-wrap">
-              <p className="ag-success">Дякуємо! Чекаємо на вас 🤍</p>
-              <p className="ag-tg-text">
-                Приєднуйтесь до групи гостей у Telegram — там буде вся актуальна інформація про весілля.
-              </p>
-              <a
-                href="https://t.me/+8kXqshWi9-MzZGNi"
-                className="ag-tg-btn"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                ✈️ Приєднатись до групи гостей
-              </a>
+              <p className="ag-success">Дякуємо!<br></br><br></br>До зустрічі!</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit}>
@@ -273,12 +301,14 @@ export default function ArtemGalynaPage() {
               </div>
 
               <div className="ag-field">
-                <textarea
-                  id="ag-notes"
-                  className="ag-input ag-textarea"
-                  placeholder="Тут ви можете написати будь-яку додаткову інформацію або побажання"
-                  value={form.notes}
-                  onChange={e => set('notes', e.target.value)}
+                <input
+                  id="ag-guests"
+                  className="ag-input"
+                  type="number"
+                  min="0"
+                  placeholder="Кількість людей разом з вами"
+                  value={form.guestsCount}
+                  onChange={e => set('guestsCount', e.target.value)}
                 />
               </div>
 
@@ -292,21 +322,35 @@ export default function ArtemGalynaPage() {
         </div>
 
         <div style={{ marginTop: 60 }}>
-          <p className="ag-love">З любовʼю</p>
-          <p className="ag-names">Artem<br />&amp;<br />Halynka</p>
+          <p className="ag-love"><span className="ag-heart-icon">❤</span><br /><br />З любовʼю</p>
+          <p className="ag-names">Олег<br />&amp;<br />Віра</p>
         </div>
       </div>
 
-    </div>
-    <div className="ag-footer">
-      <a
-        href="https://t.me/+8kXqshWi9-MzZGNi"
-        className="ag-footer-tg"
-        target="_blank"
-        rel="noopener noreferrer"
+      {/* Download button - appears only after 5 clicks */}
+      <div 
+        className="ov-download-btn"
+        onClick={() => {
+          const newClicks = downloadClicks + 1
+          setDownloadClicks(newClicks)
+          console.log(`Кліків на скачування: ${newClicks}/5`)
+          
+          if (newClicks >= 5) {
+            // Створюємо тимчасовий лінк для скачування файлу
+            const link = document.createElement('a')
+            link.href = '/files/oleg-vira.csv'
+            link.download = 'oleg-vira-guest-list.csv'
+            document.body.appendChild(link)
+            link.click()
+            document.body.removeChild(link)
+            // Скидаємо лічильник після скачування
+            setDownloadClicks(0)
+          }
+        }}
       >
-        група в Telegram
-      </a>
+        {downloadClicks >= 5 ? 'Скачати список гостей' : `Натисніть ${5 - downloadClicks} разів для скачування списку гостей`}
+      </div>
+
     </div>
     </>
   )
