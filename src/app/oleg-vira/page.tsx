@@ -90,7 +90,7 @@ export default function OlegViraPage() {
 
         <div className="ag-envelope" onClick={openInvitation} role="button" aria-label="Відкрити запрошення">
           <Image
-            src="/artem-galynka/envelope.png"
+            src="/oleg-vira/envelope.png"
             alt="Конверт"
             width={340}
             height={240}
