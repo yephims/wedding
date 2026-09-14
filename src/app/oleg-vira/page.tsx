@@ -216,11 +216,12 @@ export default function OlegViraPage() {
       <div className="ag-dresscode">
         <div className="ag-dresscode-inner">
           <h2 className="ag-section-title">Дрес-код</h2>
-          <p className="ag-section-text">
-           ніжні пастельні кольори
-          </p>
+          
            <p className="ag-section-text">
             Ми будемо вдячні, якщо при виборі одягу ви дотримаєтесь кольорової гами нашого весілля
+          </p>
+          <p className="ag-section-text">
+           ніжні пастельні кольори
           </p>
           <div className="ag-palette">
             <div className="ag-color-circle" style={{ background: '#F2B8B8' }} />
