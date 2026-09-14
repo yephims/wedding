@@ -186,25 +186,28 @@ export default function OlegViraPage() {
           <div className="ov-event">
             <div className="ov-time">11:00</div>
             <div className="ov-title">Вінчання</div>
-            <p className="ov-description">Приєднайтесь до нашої спільної молитви про благословення нашої сім'ї</p>
           </div>
           
           <div className="ov-event">
             <div className="ov-time">14:00</div>
-            <div className="ov-title">Перерва</div>
-            <p className="ov-description">Ви можете скористатися чудовою нагодою познайомитися з іншими гостями та відпочити</p>
-          </div>
-          
-          <div className="ov-event">
-            <div className="ov-time">14:30</div>
             <div className="ov-title">Весільний бенкет</div>
-            <p className="ov-description">Найшильнішою пам'яттю для нас буде ваша щира участь, співи і теплі побажання. Хочемо, щоб атмосфера свята була неймовірною та врочистою</p>
+            <p className="ov-description">Частина 1</p>
+          </div>
+
+          <div className="ov-event">
+            <div className="ov-time">16:00</div>
+            <div className="ov-title">Перерва</div>
+          </div>
+
+          <div className="ov-event">
+            <div className="ov-time">16:30</div>
+            <div className="ov-title">Весільний бенкет</div>
+            <p className="ov-description">Частина 2</p>
           </div>
           
           <div className="ov-event">
-            <div className="ov-time">19:00</div>
+            <div className="ov-time">18:30</div>
             <div className="ov-title">Завершення свята</div>
-            <p className="ov-description">Час для привітання, спільних фото та теплих обіймів</p>
           </div>
         </div>
       </section>
@@ -228,7 +231,6 @@ export default function OlegViraPage() {
 
  {/* ── PHOTOS ── */}
       <div className="ov-photos">
-        <h2 className="ov-photos-title">Наші моменти</h2>
         <div className="ov-photos-grid">
           <div className="ov-photo ov-photo-top">
             <Image
@@ -263,9 +265,9 @@ export default function OlegViraPage() {
       
       {/* ── FORM ── */}
       <div className="ag-form-section">
-        <h2 className="ag-form-title">Анкета гостя</h2>
+        <h2 className="ag-form-title">Реєстрація</h2>
         <p className="ag-form-subtitle">
-          Будь ласка, надайте вашу відповідь про присутність до 27.09.2026
+          Будь ласка, надайте вашу відповідь про присутність до 01.10.2026
         </p>
         <div className="ag-form-wrap">
           {submitted ? (
